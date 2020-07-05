@@ -1,6 +1,8 @@
 package Controller;
 
+import Model.Patient;
 import Model.Student;
+import Model.TreatmentFile;
 import View.StudentView;
 
 import java.io.IOException;
@@ -26,5 +28,10 @@ public class StudentController {
 	public boolean createNewPatient(String id, String firstName, String lastName, String phone, String email) {
 		m_student.addPatient(id,firstName,lastName,phone,email);
 		return true;
+	}
+
+	public TreatmentFile findPatient(String patientId) {
+		Patient p = m_student.findPatient(patientId);
+		return  p.getM_treatmentFile();
 	}
 }

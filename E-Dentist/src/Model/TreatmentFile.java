@@ -1,20 +1,21 @@
 package Model;
 
-public class TreatmentFile // add observer 
+import java.util.ArrayList;
+import java.util.List;
+
+public class TreatmentFile // add observer
 {
 
-	private DataManager m_Treatment;
+	private List<Treatment> m_Treatments ;
 	
 	
 	public TreatmentFile() {
-		// TODO Auto-generated constructor stub
+		m_Treatments = new ArrayList<Treatment>();
 	}
 	
 	
 	public void StartTreatment(Treatment i_Treatment, long i_IdInstractor) {
 		//TODO
-		
-		
 	}
 	
 	public void CreateTreatment() {

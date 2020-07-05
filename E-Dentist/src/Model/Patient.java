@@ -8,4 +8,7 @@ public class Patient extends Person {
 		super(i_FirstName,i_LastName,i_ID,i_NumberPhone,i_Email);
 	}
 
+	public TreatmentFile getM_treatmentFile() {
+		return m_treatmentFile;
+	}
 }

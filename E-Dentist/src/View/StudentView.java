@@ -37,6 +37,7 @@ public class StudentView {
                         break;
                     }
                     case ("2"):{
+                        findFilePatient(scanner);
                         break;
                     }
                     case ("3"):{
@@ -54,6 +55,15 @@ public class StudentView {
                         System.out.println("Invalid input");
                 }
             }
+
+    }
+
+    private void findFilePatient(Scanner scanner) {
+        String patientId;
+        System.out.println("Enter patient ID:");
+        patientId = scanner.nextLine();
+        if(!(m_studentController.findPatient(patientId)))
+
 
     }
 
