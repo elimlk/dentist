@@ -25,7 +25,7 @@ public class DataManager
 		m_ListOfPatients = new ArrayList<Patient>();
 		m_Requirements = m_Requirements.getInstance();
 
-		//להוסיף LOAD
+
 
 	}
 
@@ -53,11 +53,11 @@ public class DataManager
 			oos.close();
 			fos.close();
 
-/*			fos = new FileOutputStream(requirementsFileName);
+			fos = new FileOutputStream(requirementsFileName);
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(m_Requirements);
 			oos.close();
-			fos.close();*/
+			fos.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -87,11 +87,12 @@ public class DataManager
 			ois.close();
 			fis.close();
 
-/*			fis = new FileInputStream(requirementsFileName);
+			fis = new FileInputStream(requirementsFileName);
 			ois = new ObjectInputStream(fis);
 			m_Requirements = (Requirements) ois.readObject();
 			ois.close();
-			fis.close();*/
+			fis.close();
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {

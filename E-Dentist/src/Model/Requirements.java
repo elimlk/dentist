@@ -40,4 +40,8 @@ public class Requirements implements Serializable {
 	public int getReq(int index){
 		return listOfReq.get(index);
 	}
+
+	public Object readResolve(){
+		return getInstance();
+	}
 }
