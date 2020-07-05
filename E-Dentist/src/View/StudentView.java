@@ -63,7 +63,12 @@ public class StudentView {
         System.out.println("Enter patient ID:");
         patientId = scanner.nextLine();
         if(!(m_studentController.findPatient(patientId)))
-
+        /*
+        הפיכת הפונקציה הזאת ל-openFilePatient
+        הפיכת findPatient מהקונטרולר לboolean
+        אם נמצא את התיק נפתח כאן סוויצ קייס של פעולות על התיק
+        אחרת נחזיר הודעה שגיאה שהתיק אינו נמצא
+         */
 
     }
 
