@@ -64,20 +64,20 @@ public class StudentView {
         patientId = scanner.nextLine();
         if(!(m_studentController.findPatient(patientId)))
             System.out.println("Patient with id: " +patientId+ "not found!");
-
-        System.out.println("Opened file! what would you like to do?");
-        System.out.println("1. Show upcoming treatments");
-        System.out.println("2. Start a treatment");
-        System.out.println("3. Add a treatment");
-        System.out.println(("4. Delete a treatment"));
-        System.out.println("B to go back");
-        /*
-        הפיכת הפונקציה הזאת ל-openFilePatient
-        הפיכת findPatient מהקונטרולר לboolean
-        אם נמצא את התיק נפתח כאן סוויצ קייס של פעולות על התיק
-        אחרת נחזיר הודעה שגיאה שהתיק אינו נמצא
-         */
-
+        else {
+            System.out.println("Opened file! what would you like to do?");
+            System.out.println("1. Show upcoming treatments");
+            System.out.println("2. Start a treatment");
+            System.out.println("3. Add a treatment");
+            System.out.println("4. Delete a treatment");
+            System.out.println("B to go back");
+            /*
+            הפיכת הפונקציה הזאת ל-openFilePatient
+            הפיכת findPatient מהקונטרולר לboolean
+         אם נמצא את התיק נפתח כאן סוויצ קייס של פעולות על התיק
+            אחרת נחזיר הודעה שגיאה שהתיק אינו נמצא
+            */
+        }
     }
 
     private void createNewPatient(Scanner scanner) {
