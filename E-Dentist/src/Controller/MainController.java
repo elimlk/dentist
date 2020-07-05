@@ -67,7 +67,7 @@ public class MainController {
 		 
 		return validInput;
 
-        //complete validation tests
+
 
         mainModel.register(id,firstName,lastName,phone,email,password,instructor);
         return !validInput;
