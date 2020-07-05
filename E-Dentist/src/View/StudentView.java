@@ -27,7 +27,7 @@ public class StudentView {
                 System.out.println("--------------------------------------");
                 System.out.println("What do you like to do?");
                 System.out.println("1. Check requirements status");
-                System.out.println("2. find file patient(by ID)");
+                System.out.println("2. open patient file(by ID)");
                 System.out.println("3. create new patient");
                 System.out.println("B to log out");
                 userInput = scanner.nextLine();
@@ -37,7 +37,7 @@ public class StudentView {
                         break;
                     }
                     case ("2"):{
-                        findFilePatient(scanner);
+                        openFilePatient(scanner);
                         break;
                     }
                     case ("3"):{
@@ -58,11 +58,19 @@ public class StudentView {
 
     }
 
-    private void findFilePatient(Scanner scanner) {
+    private void openFilePatient(Scanner scanner) {
         String patientId;
         System.out.println("Enter patient ID:");
         patientId = scanner.nextLine();
-        if(!(m_studentController.findPatient(patientId))) //asdasd
+        if(!(m_studentController.findPatient(patientId)))
+            System.out.println("Patient with id: " +patientId+ "not found!");
+
+        System.out.println("Opened file! what would you like to do?");
+        System.out.println("1. Show upcoming treatments");
+        System.out.println("2. Start a treatment");
+        System.out.println("3. Add a treatment");
+        System.out.println(("4. Delete a treatment"));
+        System.out.println("B to go back");
         /*
         הפיכת הפונקציה הזאת ל-openFilePatient
         הפיכת findPatient מהקונטרולר לboolean

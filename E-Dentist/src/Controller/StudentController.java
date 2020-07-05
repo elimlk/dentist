@@ -30,8 +30,11 @@ public class StudentController {
 		return true;
 	}
 
-	public TreatmentFile findPatient(String patientId) {
+
+	public boolean findPatient(String patientId) {
 		Patient p = m_student.findPatient(patientId);
-		return  p.getM_treatmentFile();
+		if (p == null)
+			return false;
+		return true;
 	}
 }
