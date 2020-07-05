@@ -62,7 +62,7 @@ public class StudentView {
         String patientId;
         System.out.println("Enter patient ID:");
         patientId = scanner.nextLine();
-        if(!(m_studentController.findPatient(patientId)))
+        if(!(m_studentController.findPatient(patientId))) //asdasd
         /*
         הפיכת הפונקציה הזאת ל-openFilePatient
         הפיכת findPatient מהקונטרולר לboolean
