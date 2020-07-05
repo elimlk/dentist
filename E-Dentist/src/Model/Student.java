@@ -13,18 +13,15 @@ public class Student extends Person
 	private String m_Password;
 	private StudentRequirement m_CurrentReq;
 	private Requirements req;
-	private DataManager data;
 
 	public Student() { }
 
 	public Student(String i_FirstName, String i_LastName, String i_ID , String i_NumberPhone, String i_Email, String i_Password)
 	{
 		
-		super(i_FirstName, i_LastName,  i_ID, i_NumberPhone);
-		m_Email = i_Email;
+		super(i_FirstName, i_LastName,  i_ID, i_NumberPhone,i_Email);
 		m_Password = i_Password;
 		m_CurrentReq = new StudentRequirement();
-		
 	}
 
 	public String getM_Email() {
@@ -55,14 +52,19 @@ public class Student extends Person
 	
 	public Patient findPatient(String i_IdPatient) {
 
-		data = DataManager.getInstance();
+		DataManager data = DataManager.getInstance();
 		return data.findPatientInData(i_IdPatient);
 
 	}
 	
-	public void AddPatient() {
-		//TODO
-		
+	public boolean addPatient(String id, String firstName, String lastName, String phone, String email) {
+		Patient p;
+		DataManager data = DataManager.getInstance();
+		if(!(data.checkValidity(id,firstName,lastName,phone,email)))
+			return false;
+		p = new Patient(id,firstName,lastName,phone,email);
+		data.addPatient(p);
+		return true;
 	}
 	
 	public void DeletePatient(String i_IdPatient) {

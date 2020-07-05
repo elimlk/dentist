@@ -141,6 +141,50 @@ public class DataManager
 	}
 
 
+	public boolean checkValidity(String id, String firstName, String lastName, String phone, String email) {
 
+		int id_int = 0;
+		boolean validInput = true;
 
+		if (id.length() != 9)
+			return !validInput;
+
+/*        try {
+
+            id_int = Integer.parseInt(id);
+
+        } catch (NumberFormatException e) {
+
+        	return validInput;
+            //e.printStackTrace();
+        }
+      //complete validation tests
+        if(!(phone.length() == 10))  //phone val
+
+        	return validInput;
+
+        try {
+
+            int replace = Integer.parseInt(phone);
+
+        } catch (NumberFormatException e) {
+
+        	return validInput;
+            //e.printStackTrace();
+        }
+        //email val//
+        if(!(email.contains("@") || email.contains(".co.il") ||  email.contains(".com")  || email.contains(".ac.il")))
+
+        	return validInput;
+
+	 if(email.contains("@@"))
+
+		return validInput;*/
+
+		return validInput;
+	}
+
+	public void addPatient(Patient p) {
+		m_ListOfPatients.add(p);
+	}
 }

@@ -28,7 +28,10 @@ public class MainModel {
         return null;
     }
 
-    public void register(String id, String firstName, String lastName, String phone, String email, String password, boolean instructor) {
+    public boolean register(String id, String firstName, String lastName, String phone, String email, String password, boolean instructor) {
+
+        if(!(dataManager.checkValidity(id,firstName,lastName,phone,email)))
+            return false;
         Instructor newIns;
         Student newStudent;
         if(instructor) {
@@ -40,5 +43,6 @@ public class MainModel {
             dataManager.addStudent(newStudent);
         }
 
+        return true;
     }
 }

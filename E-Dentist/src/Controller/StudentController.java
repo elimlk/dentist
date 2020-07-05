@@ -22,4 +22,9 @@ public class StudentController {
 	public List<Integer> checkStatus() {
 		return m_student.checkStatus();
 	}
+
+	public boolean createNewPatient(String id, String firstName, String lastName, String phone, String email) {
+		m_student.addPatient(id,firstName,lastName,phone,email);
+		return true;
+	}
 }

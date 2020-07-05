@@ -40,6 +40,7 @@ public class StudentView {
                         break;
                     }
                     case ("3"):{
+                        createNewPatient(scanner);
                         break;
                     }
                     case ("B"):{
@@ -53,6 +54,31 @@ public class StudentView {
                         System.out.println("Invalid input");
                 }
             }
+
+    }
+
+    private void createNewPatient(Scanner scanner) {
+        String id,firstName,lastName,phone,email;
+
+        System.out.println("Enter id:");
+        id = scanner.nextLine();
+
+        System.out.println("Enter patient first name:");
+        firstName = scanner.nextLine();
+
+        System.out.println("Enter patient last name:");
+        lastName = scanner.nextLine();
+
+        System.out.println("Enter patient phone");
+        phone = scanner.nextLine();
+
+        System.out.println("Enter patient Email:");
+        email = scanner.nextLine();
+
+        if (m_studentController.createNewPatient(id,firstName,lastName,phone,email))
+            System.out.println("Patient added successfully");
+        else
+            System.out.println("Failed to add add patient.");
 
     }
 

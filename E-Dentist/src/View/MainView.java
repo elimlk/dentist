@@ -126,7 +126,7 @@ public class MainView {
     private void registertion(Scanner scanner,boolean instructor) {
         String id,firstName,lastName,phone,email,password;
 
-        System.out.println("Enter id: (without 0 on start)");
+        System.out.println("Enter id:");
         id = scanner.nextLine();
         
         System.out.println("Enter your first name:");
@@ -144,7 +144,10 @@ public class MainView {
         System.out.println("Enter password: ");
         password = scanner.nextLine();
         
-        mainController.register(id,firstName,lastName,phone,email,password,instructor);
+        if (mainController.register(id,firstName,lastName,phone,email,password,instructor))
+            System.out.println("Registration successful");
+        else
+            System.out.println("One or more fields incorrect"); // add specific error code
 
     }
 

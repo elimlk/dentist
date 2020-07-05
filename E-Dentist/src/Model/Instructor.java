@@ -11,11 +11,6 @@ public class Instructor extends Person {
 	private String m_Password;
 	private eTypeOfTreatment TypeOfTreatment;
 	private DataManager m_Treatment;
-	///private int m_CodeOfSemester;
-	
-	//private DataManager m_ListOfLecturer = new DataManager();
-	
-	 
 	
 	public Instructor() { }
 	
@@ -23,9 +18,7 @@ public class Instructor extends Person {
 		String i_NumberPhone, String i_Email, String i_Password) 
 	{
 		
-	    super(i_FirstName, i_LastName ,i_ID , i_NumberPhone);		
-		
-	    m_Email = i_Email;
+	    super(i_FirstName, i_LastName ,i_ID , i_NumberPhone,i_Email);
 	    m_Password = i_Password;
 
 		
