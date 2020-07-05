@@ -29,11 +29,11 @@ public class MainController {
         //valditaion test
         
     	int id_int = 0;
-        boolean worangInput = false;
+        boolean validInput = false;
         
         if (id.length() != 9 || id.length() != 8)
         	
-            return worangInput;
+            return validInput;
       
         try {
         	
@@ -41,35 +41,35 @@ public class MainController {
             
         } catch (NumberFormatException e) {
             
-        	return worangInput;
+        	return validInput;
             //e.printStackTrace();
         }
       //complete validation tests
         if(!(phone.length() == 10))  //phone val
          
-        	return worangInput;
+        	return validInput;
         
         try {
         	
-            int_replace = Integer.parseInt(phone);
+            int replace = Integer.parseInt(phone);
             
         } catch (NumberFormatException e) {
            
-        	return worangInput;
+        	return validInput;
             //e.printStackTrace();
         }
         //email val//
         if(!(email.contains("@") || email.contains(".co.il") ||  email.contains(".com")  || email.contains(".ac.il")))
 		
-        	return worangInput;
+        	return validInput;
         
 	 if(email.contains("@@"))
 		 
-		return worangInput;
+		return validInput;
 
         //complete validation tests
 
         mainModel.register(id,firstName,lastName,phone,email,password,instructor);
-        return !worangInput;
+        return !validInput;
     }
 }
