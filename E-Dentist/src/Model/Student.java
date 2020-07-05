@@ -23,6 +23,7 @@ public class Student extends Person
 		super(i_FirstName, i_LastName,  i_ID, i_NumberPhone);
 		m_Email = i_Email;
 		m_Password = i_Password;
+		m_CurrentReq = new StudentRequirement();
 		
 	}
 

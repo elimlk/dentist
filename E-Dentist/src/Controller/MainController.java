@@ -5,6 +5,9 @@ import View.InstructorView;
 import View.MainView;
 import View.StudentView;
 
+import java.io.IOException;
+import java.util.Scanner;
+
 public class MainController {
 
     MainModel mainModel;
@@ -65,11 +68,10 @@ public class MainController {
         return validInput;
     }
 
-    public void loginAccess(Person p) {
+    public void loginAccess(Scanner scanner,Person p) throws IOException {
         if (p instanceof Student){
-            StudentView studentView = new StudentView();
-            StudentController studentController = new StudentController((Student)p,studentView);
-            studentController.start();
+            StudentController studentController = new StudentController((Student)p);
+            studentController.start(scanner);
         }
     }
 }

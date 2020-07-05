@@ -13,24 +13,16 @@ import java.util.Scanner;
 public class MainView {
     private final MainController mainController;
 
-    private final StudentView studentView;
-    private final InstructorView instructorView;
-    private final StudentController studentController;
-    private final InstructorController instructorController;
 
     public MainView() {
      
     	mainController = new MainController();
 
-        this.studentView = new StudentView();
-        this.instructorView = new InstructorView();
-        this.studentController = new StudentController();
-        this.instructorController = new InstructorController();
         
     }
 
     public void start() throws IOException {
-        
+        System.out.println("--------------------------------------");
     	System.out.println("Welcome to E-Dentist");
         
     	boolean stayInApp = true;
@@ -72,7 +64,7 @@ public class MainView {
     }
 
     public void login(Scanner scanner) throws IOException{
-        
+        System.out.println("--------------------------------------");
     	System.out.println("Enter id: ");
         String id = scanner.nextLine();
         System.out.println("Enter password: ");
@@ -82,10 +74,10 @@ public class MainView {
 
         if (loginAttempt != null)
         {
-           
-        	System.out.println("login success!");
+
+            System.out.println("login success!");
             System.out.println("Welcome "+loginAttempt.getM_FirstNameOfPerson());
-            mainController.loginAccess(loginAttempt);
+            mainController.loginAccess(scanner,loginAttempt);
         }
         else
            
@@ -94,7 +86,7 @@ public class MainView {
     }
 
     public void register(Scanner scanner) throws IOException{
-
+        System.out.println("--------------------------------------");
         System.out.println("1 to register as student");
         System.out.println("2 to register as instructor (password required)");
       
