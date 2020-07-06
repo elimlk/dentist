@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Patient;
 import Model.Student;
+import Model.Treatment;
 import Model.TreatmentFile;
 import View.StudentView;
 
@@ -36,5 +37,11 @@ public class StudentController {
 		if (p == null)
 			return false;
 		return true;
+	}
+
+	public String showTreatments(String patientId) {
+		TreatmentFile treatmentFile = m_student.findPatient(patientId).getM_treatmentFile();
+		String treatmentFileString = treatmentFile.toString();
+		return treatmentFileString;
 	}
 }

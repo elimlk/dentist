@@ -62,7 +62,7 @@ public class Student extends Person
 		DataManager data = DataManager.getInstance();
 		if(!(data.checkValidity(id,firstName,lastName,phone,email)))
 			return false;
-		p = new Patient(id,firstName,lastName,phone,email);
+		p = new Patient(firstName,lastName,id,phone,email);
 		data.addPatient(p);
 		return true;
 	}

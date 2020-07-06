@@ -20,10 +20,10 @@ public class StudentView {
 
     public void start(Scanner scanner) throws IOException {
         //Runtime.getRuntime().exec("cls");
-        boolean stayInApp = true;
+        boolean stayMenu = true;
 
         String userInput;
-            while (stayInApp) {
+            while (stayMenu) {
                 System.out.println("--------------------------------------");
                 System.out.println("What do you like to do?");
                 System.out.println("1. Check requirements status");
@@ -48,7 +48,7 @@ public class StudentView {
 
                     }
                     case ("b"):{
-                        stayInApp = false;
+                        stayMenu = false;
                         break;
                     }
                     default:
@@ -60,17 +60,41 @@ public class StudentView {
 
     private void openFilePatient(Scanner scanner) {
         String patientId;
+        String userInput; // user input in sub menu
+        boolean stayMenu = true;
         System.out.println("Enter patient ID:");
         patientId = scanner.nextLine();
         if(!(m_studentController.findPatient(patientId)))
             System.out.println("Patient with id: " +patientId+ "not found!");
         else {
-            System.out.println("Opened file! what would you like to do?");
-            System.out.println("1. Show upcoming treatments");
-            System.out.println("2. Start a treatment");
-            System.out.println("3. Add a treatment");
-            System.out.println("4. Delete a treatment");
-            System.out.println("B to go back");
+            while (stayMenu) {
+                System.out.println("Opened file! what would you like to do?");
+                System.out.println("1. Show upcoming treatments");
+                System.out.println("2. Start a treatment");
+                System.out.println("3. Add a treatment");
+                System.out.println("4. Delete a treatment");
+                System.out.println("B to go back");
+                userInput = scanner.nextLine();
+                switch (userInput){
+                    case ("1"):
+                        System.out.println(m_studentController.showTreatments(patientId));
+                        break;
+                    case ("2"):
+                        break;
+                    case ("3"):
+                        break;
+                    case ("4"):
+                        break;
+                    case ("b"):
+
+                    case ("B"):
+                        break;
+                    default:
+                        break;
+                }
+
+
+            }
             /*
             הפיכת הפונקציה הזאת ל-openFilePatient
             הפיכת findPatient מהקונטרולר לboolean
