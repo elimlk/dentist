@@ -67,8 +67,9 @@ public class StudentView {
         if(!(m_studentController.findPatient(patientId)))
             System.out.println("Patient with id: " +patientId+ "not found!");
         else {
+            System.out.println("Opened file!");
             while (stayMenu) {
-                System.out.println("Opened file! what would you like to do?");
+                System.out.println("what would you like to do?");
                 System.out.println("1. Show upcoming treatments");
                 System.out.println("2. Start a treatment");
                 System.out.println("3. Add a treatment");
@@ -77,7 +78,9 @@ public class StudentView {
                 userInput = scanner.nextLine();
                 switch (userInput){
                     case ("1"):
+                        System.out.println("--------------------------------------------");
                         System.out.println(m_studentController.showTreatments(patientId));
+                        System.out.println("--------------------------------------------");
                         break;
                     case ("2"):
                         break;
@@ -88,6 +91,7 @@ public class StudentView {
                     case ("b"):
 
                     case ("B"):
+                        stayMenu = false;
                         break;
                     default:
                         break;
@@ -96,10 +100,7 @@ public class StudentView {
 
             }
             /*
-            הפיכת הפונקציה הזאת ל-openFilePatient
-            הפיכת findPatient מהקונטרולר לboolean
-         אם נמצא את התיק נפתח כאן סוויצ קייס של פעולות על התיק
-            אחרת נחזיר הודעה שגיאה שהתיק אינו נמצא
+                נדרש לייצר מזהה לכל טיפול כדי שהתחלת טיפול תהיה ע"פ מזהה מסויים
             */
         }
     }

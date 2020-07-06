@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.text.*;
@@ -7,7 +8,7 @@ import java.time.*;
 import java.time.format.*;
 import Enums.*;
 
-public class Treatment {
+public class Treatment implements Serializable {
 
 	private String m_Description;
 	private String m_TreatmentBy;
@@ -32,11 +33,11 @@ public class Treatment {
 
 		if (m_Grade == -1)
 		{
-			return "Treatment{" +
+			return "{" +
 					"Description='" + m_Description + '\'' +
 					",Treated By='" + m_TreatmentBy + '\'' +
 					", Validated By='" + m_ValidatedBy + '\'' +
-					", Type=" +m_Type + '\''+
+					", Type='" +m_Type + '\''+
 					", Grade = pending" +
 					'}';
 		}
