@@ -2,15 +2,18 @@ package Model;
 
 import java.io.*;
 import java.util.*;
+import java.util.regex.Matcher; 
+import java.util.regex.Pattern;
 
 
 public class DataManager
 {
+	
 	private static DataManager instance;
-	private static List<Student> m_ListOfStudents;
-	private static List<Instructor> m_ListOfInstructors;
-	private static List<Patient> m_ListOfPatients;
-	private static Requirements m_Requirements;
+	private static List<Student> s_ListOfStudents;
+	private static List<Instructor> s_ListOfInstructors;
+	private static List<Patient> s_ListOfPatients;
+	private static Requirements s_Requirements;
 
 	final String studentListFileName = "students_list.ser";
 	final String instructorFileName = "instructors_list.ser";
@@ -20,12 +23,10 @@ public class DataManager
 	private DataManager()
 	{
 
-		m_ListOfStudents = new ArrayList<Student>();
-		m_ListOfInstructors = new ArrayList<Instructor>();
-		m_ListOfPatients = new ArrayList<Patient>();
-		m_Requirements = m_Requirements.getInstance();
-
-
+		s_ListOfStudents = new ArrayList<Student>();
+		s_ListOfInstructors = new ArrayList<Instructor>();
+		s_ListOfPatients = new ArrayList<Patient>();
+		s_Requirements = s_Requirements.getInstance();
 
 	}
 
@@ -35,109 +36,143 @@ public class DataManager
 		ObjectOutputStream oos;
 
 		try {
+			
 			fos = new FileOutputStream(studentListFileName);
 			oos = new ObjectOutputStream(fos);
-			oos.writeObject(m_ListOfStudents);
+			oos.writeObject(s_ListOfStudents);
 			oos.close();
 			fos.close();
 
 			fos = new FileOutputStream(instructorFileName);
 			oos = new ObjectOutputStream(fos);
-			oos.writeObject(m_ListOfInstructors);
+			oos.writeObject(s_ListOfInstructors);
 			oos.close();
 			fos.close();
 
 			fos = new FileOutputStream(patienntFileName);
 			oos = new ObjectOutputStream(fos);
-			oos.writeObject(m_ListOfPatients);
+			oos.writeObject(s_ListOfPatients);
 			oos.close();
 			fos.close();
 
 			fos = new FileOutputStream(requirementsFileName);
 			oos = new ObjectOutputStream(fos);
-			oos.writeObject(m_Requirements);
+			oos.writeObject(s_Requirements);
 			oos.close();
 			fos.close();
+			
 		} catch (IOException e) {
+			
 			e.printStackTrace();
+			
 		}
 
 	}
 
 	public void loadData() throws IOException, ClassNotFoundException {
+		
 		FileInputStream fis;
 		ObjectInputStream ois;
 
 		try {
+			
 			fis = new FileInputStream(studentListFileName);
 			ois = new ObjectInputStream(fis);
-			m_ListOfStudents = (ArrayList) ois.readObject();
+			s_ListOfStudents = (ArrayList) ois.readObject();
 			ois.close();
 			fis.close();
 
 			fis = new FileInputStream(instructorFileName);
 			ois = new ObjectInputStream(fis);
-			m_ListOfInstructors = (ArrayList) ois.readObject();
+			s_ListOfInstructors = (ArrayList) ois.readObject();
 			ois.close();
 			fis.close();
 
 			fis = new FileInputStream(patienntFileName);
 			ois = new ObjectInputStream(fis);
-			m_ListOfPatients = (ArrayList) ois.readObject();
+			s_ListOfPatients = (ArrayList) ois.readObject();
 			ois.close();
 			fis.close();
 
 			fis = new FileInputStream(requirementsFileName);
 			ois = new ObjectInputStream(fis);
-			m_Requirements = (Requirements) ois.readObject();
+			s_Requirements = (Requirements) ois.readObject();
 			ois.close();
 			fis.close();
 
 		} catch (IOException e) {
+			
 			e.printStackTrace();
+		
 		} catch (ClassNotFoundException e) {
+			
 			e.printStackTrace();
+		
 		}
 
 	}
+	
 	public static DataManager getInstance()
 	{
+		
 		if (instance == null) {
+		
 			instance = new DataManager();
+		
 		}
+		
 		return instance;
+	
 	}
 
 	public Patient findPatientInData(String id)
 	{
-		for(Patient p : m_ListOfPatients){
-			if (p.getM_ID().equals(id))
-				return p;
+		for(Patient person : s_ListOfPatients){
+			
+			if (person.getM_ID().equals(id))
+				
+				return person;
+			
 		}
+		
 		return null;
+		
 	}
 
 	public Instructor findInstructor(String id) {
-		for(Instructor I : m_ListOfInstructors){
-			if (I.getM_ID().equals(id))
-				return I;
+		
+		for(Instructor Instructor : s_ListOfInstructors){
+			
+			if (Instructor.getM_ID().equals(id))
+				
+				return Instructor;
 		}
+		
 		return null;
 	}
+	
 	public Student findStudent(String id){
-		for(Student s : m_ListOfStudents){
-			if (s.getM_ID().equals(id))
-				return s;
+		
+		for(Student student : s_ListOfStudents){
+		
+			if (student.getM_ID().equals(id))
+			
+				return student;
 		}
+		
 		return null;
 	}
 
-	public void addInstructor(Instructor newIns) {
-		m_ListOfInstructors.add(newIns);
+	public void addInstructor(Instructor newInstructor) {
+		
+		s_ListOfInstructors.add(newInstructor);
+	
 	}
 
 	public void addStudent(Student newStudent) {
-		m_ListOfStudents.add(newStudent);
+		
+		s_ListOfStudents.add(newStudent);
+	
 	}
 
 
@@ -145,46 +180,21 @@ public class DataManager
 
 		int id_int = 0;
 		boolean validInput = true;
+		String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+ 
+                "[a-zA-Z0-9_+&*-]+)*@" + 
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z A-Z]{2,7}$";
+		Pattern pattern = Pattern.compile(emailRegex);
 
-		if (id.length() != 9)
-			return !validInput;
-
-/*        try {
-
-            id_int = Integer.parseInt(id);
-
-        } catch (NumberFormatException e) {
-
-        	return validInput;
-            //e.printStackTrace();
-        }
-      //complete validation tests
-        if(!(phone.length() == 10))  //phone val
-
-        	return validInput;
-
-        try {
-
-            int replace = Integer.parseInt(phone);
-
-        } catch (NumberFormatException e) {
-
-        	return validInput;
-            //e.printStackTrace();
-        }
-        //email val//
-        if(!(email.contains("@") || email.contains(".co.il") ||  email.contains(".com")  || email.contains(".ac.il")))
-
-        	return validInput;
-
-	 if(email.contains("@@"))
-
-		return validInput;*/
+		if (id.length() != 9 || (pattern.matcher(email).matches() == false))
+			
+			validInput = !validInput;
 
 		return validInput;
+		
 	}
 
-	public void addPatient(Patient p) {
-		m_ListOfPatients.add(p);
+	public void addPatient(Patient patient) {
+		
+		s_ListOfPatients.add(patient);
 	}
 }

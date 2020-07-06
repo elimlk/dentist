@@ -22,7 +22,8 @@ public class MainView {
     }
 
     public void start() throws IOException {
-        System.out.println("--------------------------------------");
+        
+    	System.out.println("--------------------------------------");
     	System.out.println("Welcome to E-Dentist");
         
     	boolean stayInApp = true;
@@ -40,18 +41,20 @@ public class MainView {
 
                 switch (userInput)
                 {
+                
                     case ("1"):
                         login(scanner);
                         break;
+                        
                     case ("2"):
                         register(scanner);
                         break;
+                        
                     case ("q"):
-
-
                     case ("Q"):
-                        stayInApp=false;
+                        stayInApp = false;
                         break;
+                        
                     default:
                         System.out.println("Invalid input");
                         break;
@@ -64,7 +67,8 @@ public class MainView {
     }
 
     public void login(Scanner scanner) throws IOException{
-        System.out.println("--------------------------------------");
+      
+    	System.out.println("--------------------------------------");
     	System.out.println("Enter id: ");
         String id = scanner.nextLine();
         System.out.println("Enter password: ");
@@ -78,6 +82,7 @@ public class MainView {
             System.out.println("login success!");
             System.out.println("Welcome "+loginAttempt.getM_FirstNameOfPerson());
             mainController.loginAccess(scanner,loginAttempt);
+            
         }
         else
            
@@ -86,7 +91,8 @@ public class MainView {
     }
 
     public void register(Scanner scanner) throws IOException{
-        System.out.println("--------------------------------------");
+        
+    	System.out.println("--------------------------------------");
         System.out.println("1 to register as student");
         System.out.println("2 to register as instructor (password required)");
       
@@ -124,7 +130,8 @@ public class MainView {
 }
 
     private void registertion(Scanner scanner,boolean instructor) {
-        String id,firstName,lastName,phone,email,password;
+        
+    	String id,firstName,lastName,phone,email,password;
 
         System.out.println("Enter id:");
         id = scanner.nextLine();
@@ -144,10 +151,13 @@ public class MainView {
         System.out.println("Enter password: ");
         password = scanner.nextLine();
         
-        if (mainController.register(id,firstName,lastName,phone,email,password,instructor))
-            System.out.println("Registration successful");
+        if (mainController.register(id,firstName,lastName,phone,email, password,instructor))
+          
+        	System.out.println("Registration successful");
+        
         else
-            System.out.println("One or more fields incorrect"); // add specific error code
+           
+        	System.out.println("One or more fields incorrect"); // add specific error code
 
     }
 

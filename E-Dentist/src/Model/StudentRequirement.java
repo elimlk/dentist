@@ -8,22 +8,34 @@ import java.util.List;
 
 public class StudentRequirement implements Serializable {
 
-	private List<Integer> listOfReq = new ArrayList<Integer>();
+	private List<Integer> m_ListOfRequirement = new ArrayList<Integer>();
 
-	public StudentRequirement() {
+	public StudentRequirement()
+	{
+		
 		int size = eTypeOfTreatment.SIZE.getIndex();
-		for(int i=0;i<size;i++){
-			listOfReq.add(0);
+		
+		for(int i = 0 ;i < size; i++){
+		
+			m_ListOfRequirement.add(0);
+	
 		}
+	
 	}
 	
 	
-	public void incReq (int index){
-		int currentVal = listOfReq.get(index);
-		listOfReq.set(index,currentVal++);
+	public void incRequirement (int index){
+		
+		int currentVal = m_ListOfRequirement.get(index);
+		
+		m_ListOfRequirement.set(index, currentVal++);
+		
 	}
-	public int getReq(int index){
-		return listOfReq.get(index);
+	
+	public int getRequirement(int index){
+		
+		return m_ListOfRequirement.get(index);
+	
 	}
 
 }

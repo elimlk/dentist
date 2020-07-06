@@ -14,41 +14,37 @@ public class Instructor extends Person {
 	
 	public Instructor() { }
 	
-	public Instructor(String i_FirstName, String i_LastName, String i_ID ,
-		String i_NumberPhone, String i_Email, String i_Password) 
+	public Instructor(String firstName, String lastName, String iD,
+		String numberPhone, String email, String password) 
 	{
 		
-	    super(i_FirstName, i_LastName ,i_ID , i_NumberPhone,i_Email);
-	    m_Password = i_Password;
-
+	    super(firstName, lastName ,iD , numberPhone, email);
+	    m_Password = password;
 		
 	}
 	
-
 	public String getM_Email() {
 		return m_Email;
 	}
 
-	public void setM_Email(String i_Email) {
-		this.m_Email = i_Email;
+	public void setM_Email(String email) {
+		this.m_Email = email;
 	}
 
 	public String getM_Password() {
 		return m_Password;
 	}
 
-	public void setM_Password(String i_Password) {
-		this.m_Password = i_Password;
+	public void setM_Password(String password) {
+		this.m_Password = password;
 	}
-
-	
-	
-	public void ValidatetTreatment(Treatment i_Treatment) {
+		
+	public void ValidatetTreatment(Treatment treatment) {
 	//TODO	
 		
 	}
 	
-	public void CheckStatus(String i_StudentID){
+	public void CheckStatus(String studentID){
 		//TODO
 		
 	}

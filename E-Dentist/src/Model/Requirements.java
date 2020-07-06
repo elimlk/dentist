@@ -7,41 +7,61 @@ import Enums.*;
 public class Requirements implements Serializable {
 
 	private static Requirements instance;
-	private List<Integer> listOfReq = new ArrayList<Integer>();
+	private List<Integer> m_ListOfRequirement = new ArrayList<Integer>();
 
 	private Requirements() {
 
 		int size = eTypeOfTreatment.SIZE.getIndex();
-		for(int i=0;i<size;i++){
-			listOfReq.add(0);
+		
+		for(int i=0;i<size;i++) {
+			
+			m_ListOfRequirement.add(0);
+			
 		}
+		
 	}
 
 
 	public static Requirements getInstance() {
-		if (instance == null)
+		
+		if (instance == null) {
+		
 			return new Requirements();
-		else
+		}
+		else {
+			
 			return instance;
+		}
 		
 	}
 	
-	public void updateReq(int i,int value){
-		listOfReq.set(i,value);
+	public void updateRequirement(int index,int value){
+		
+		m_ListOfRequirement.set(index,value);
+		
 	}
 
-	public void updateAllReq(List<Integer> l ){
-		for(int i=0;i<listOfReq.size();i++)
+	public void updateAllRequirement(List<Integer> listOfRequirement)
+	{
+		
+		for(int i = 0; i < listOfRequirement.size(); i++)
 		{
-			listOfReq.set(i,l.get(i));
+			
+			listOfRequirement.set(i,listOfRequirement.get(i));
+		
 		}
+		
 	}
 
 	public int getReq(int index){
-		return listOfReq.get(index);
+		
+		return m_ListOfRequirement.get(index);
 	}
 
 	public Object readResolve(){
+		
 		return getInstance();
+	
 	}
+
 }

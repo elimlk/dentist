@@ -1,48 +1,68 @@
 package Model;
 
 public class MainModel {
-    DataManager dataManager;
+    
+	DataManager m_DataManager;
 
     public MainModel() {
-        dataManager = dataManager.getInstance();
+    	
+    	m_DataManager = m_DataManager.getInstance();
+    
     }
 
     public Person login(String id, String password){
 
-        Person p = dataManager.findInstructor(id);
+        Person person = m_DataManager.findInstructor(id);
 
-        if ( p == null)
-            p = dataManager.findStudent(id);
+        if ( person == null)
+        	
+        	person = m_DataManager.findStudent(id);
 
-        if (p == null)
+        if (person == null)
+        	
             return null; //User not found
 
-        if (p instanceof Instructor){
-            if(((Instructor) p).getM_Password().equals(password))
-                return p;
+        if (person instanceof Instructor)
+        {
+            if(((Instructor) person).getM_Password().equals(password))
+               
+            	return person;
         }
         else {
-            if (((Student) p).getM_Password().equals(password))
-                return p;
+            
+        	if (((Student) person).getM_Password().equals(password))
+                
+        		return person;
         }
+        
         return null;
+    
     }
 
     public boolean register(String id, String firstName, String lastName, String phone, String email, String password, boolean instructor) {
 
-        if(!(dataManager.checkValidity(id,firstName,lastName,phone,email)))
+        if(!(m_DataManager.checkValidity(id, firstName, lastName, phone, email)))
             return false;
-        Instructor newIns;
+       
+        Instructor newInstructor;
         Student newStudent;
+        
         if(instructor) {
-            newIns = new Instructor(firstName, lastName, id, phone, email, password);
-            dataManager.addInstructor(newIns);
+        
+        	newInstructor = new Instructor(firstName, lastName, id, phone, email, password);
+        	m_DataManager.addInstructor(newInstructor);
+        
         }
-        else{
-            newStudent = new Student(firstName,lastName,id,phone,email,password);
-            dataManager.addStudent(newStudent);
+        else
+        {
+        
+        	newStudent = new Student(firstName,lastName,id,phone,email,password);
+        	m_DataManager.addStudent(newStudent);
+        
         }
 
         return true;
+        
     }
+    
 }

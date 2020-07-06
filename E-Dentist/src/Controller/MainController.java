@@ -27,10 +27,13 @@ public class MainController {
 
     }
 
-    public void loginAccess(Scanner scanner,Person p) throws IOException {
-        if (p instanceof Student){
-            StudentController studentController = new StudentController((Student)p);
+    public void loginAccess(Scanner scanner,Person i_Person) throws IOException {
+        
+    	if (i_Person instanceof Student){
+    		
+            StudentController studentController = new StudentController((Student)i_Person);
             studentController.start(scanner);
+            
         }
     }
 }

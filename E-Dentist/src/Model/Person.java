@@ -14,14 +14,14 @@ public abstract class Person  implements Serializable {
 	//default cto'r
 	public Person() {  }
 	
-	public Person(String i_FirstName, String i_LastName, String i_ID , String i_NumberPhone , String i_Email)
+	public Person(String firstName, String lastName, String iD , String numberPhone , String email)
 	{
 		
-		this.m_FirstNameOfPerson = i_FirstName;
-		this.m_LastNameOfPerson = i_LastName;
-		this.m_ID = i_ID;
-		this.m_NumberPhone = i_NumberPhone;
-		this.m_email = i_Email;
+		this.m_FirstNameOfPerson = firstName;
+		this.m_LastNameOfPerson = lastName;
+		this.m_ID = iD;
+		this.m_NumberPhone = numberPhone;
+		this.m_email = email;
 			
 	}
 
