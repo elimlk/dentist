@@ -14,9 +14,9 @@ public class Treatment implements Serializable {
 	private String m_TreatmentBy;
 	private String m_ValidatedBy;
 	private String m_Type;
-	private static TypesOfTreatment type = new TypesOfTreatment();
 	private int m_Grade;
-	
+	private static TypesOfTreatment type = new TypesOfTreatment();
+
 	
 	
 	public Treatment(String i_Description,String i_TreatmentBy,String i_ValidatedBy,int i_Type) {
