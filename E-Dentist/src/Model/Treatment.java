@@ -21,8 +21,6 @@ public class Treatment implements Serializable {
 	
 	
 	public Treatment(String i_Description,String i_TreatmentBy,String i_ValidatedBy,int i_Type) {
-		//!!!!------!!!!
-		///
 		m_Description = i_Description;
 		m_TreatmentBy = i_TreatmentBy;
 		m_ValidatedBy = i_ValidatedBy;
