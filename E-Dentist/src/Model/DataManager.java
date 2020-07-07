@@ -19,6 +19,7 @@ public class DataManager
 	final String instructorFileName = "instructors_list.ser";
 	final String patienntFileName = "patient_list.ser";
 	final String requirementsFileName = "requierments.ser";
+	String instructorRegisterKey;
 	
 	private DataManager()
 	{
@@ -27,6 +28,7 @@ public class DataManager
 		s_ListOfInstructors = new ArrayList<Instructor>();
 		s_ListOfPatients = new ArrayList<Patient>();
 		s_Requirements = s_Requirements.getInstance();
+		instructorRegisterKey = "1234";
 
 	}
 
@@ -163,21 +165,23 @@ public class DataManager
 		return null;
 	}
 
-	public void addInstructor(Instructor newInstructor) {
+	public void addInstructor(Instructor newInstructor) throws IOException {
 		
 		s_ListOfInstructors.add(newInstructor);
+		saveData(); //Delete????????
 	
 	}
 
-	public void addStudent(Student newStudent) {
+	public void addStudent(Student newStudent) throws IOException {
 		
 		s_ListOfStudents.add(newStudent);
-	
+		saveData(); //Delete????????
 	}
 
-	public void addPatient(Patient patient) {
+	public void addPatient(Patient patient) throws IOException {
 
 		s_ListOfPatients.add(patient);
+		saveData(); //Delete????????
 	}
 
 	public boolean checkValidity(String id, String firstName, String lastName, String phone, String email) {
@@ -197,4 +201,7 @@ public class DataManager
 
 	}
 
+	public String getRegisterKey() {
+		return instructorRegisterKey;
+	}
 }

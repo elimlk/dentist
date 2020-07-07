@@ -3,17 +3,13 @@ package Model;
 import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
-import Enums.*; 
 
 public class Instructor extends Person {
      
 	private String m_Email;
 	private String m_Password;
-	private eTypeOfTreatment TypeOfTreatment;
-	private DataManager m_Treatment;
-	
-	public Instructor() { }
-	
+
+
 	public Instructor(String firstName, String lastName, String iD,
 		String numberPhone, String email, String password) 
 	{

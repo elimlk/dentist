@@ -3,15 +3,14 @@ package Model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import Enums.*;
 public class Requirements implements Serializable {
 
 	private static Requirements instance;
 	private List<Integer> m_ListOfRequirement = new ArrayList<Integer>();
 
 	private Requirements() {
-
-		int size = eTypeOfTreatment.SIZE.getIndex();
+		TypesOfTreatment typesOfTreatment = TypesOfTreatment.getInstance();
+		int size = typesOfTreatment.getSize();
 		
 		for(int i=0;i<size;i++) {
 			

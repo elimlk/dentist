@@ -1,9 +1,6 @@
 package Controller;
 
-import Model.Patient;
-import Model.Student;
-import Model.Treatment;
-import Model.TreatmentFile;
+import Model.*;
 import View.StudentView;
 
 import java.io.IOException;
@@ -12,8 +9,8 @@ import java.util.Scanner;
 
 public class StudentController {
 	
-	Student m_student;
-	StudentView m_studentView;
+	private Student m_student;
+	private StudentView m_studentView;
 	
 	public StudentController(Student student) throws IOException {
 		
@@ -34,7 +31,7 @@ public class StudentController {
 	
 	}
 
-	public boolean createNewPatient(String id, String firstName, String lastName, String phone, String email) {
+	public boolean createNewPatient(String id, String firstName, String lastName, String phone, String email) throws IOException {
 		
 		m_student.addPatient(id, firstName, lastName, phone, email);
 		
@@ -63,5 +60,49 @@ public class StudentController {
 		return treatmentFileString;
 		
 	}
-	
+
+	public boolean addTreatment(String i_Description, String i_InstructorId, String i_Type,String patientId) {
+		DataManager data = DataManager.getInstance();
+		TypesOfTreatment typesOfTreatment = TypesOfTreatment.getInstance();
+		Treatment treatment;
+
+		try {
+			Integer.parseInt(i_Type);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+
+
+		Instructor instructor = (data.findInstructor(i_InstructorId));
+		if (!(instructor == null) && (Integer.parseInt(i_Type)>0) && ((Integer.parseInt(i_Type)>typesOfTreatment.getSize()))){
+			treatment= new Treatment(i_Description,m_student.getM_ID(),i_InstructorId,Integer.parseInt(i_Type));
+			m_student.addTreatment(patientId,treatment);
+			return true;
+		}
+		else
+			return false;
+
+	}
+
+	public boolean completeTreatment(String patientId, String selectedTreatmentCode) {
+
+		try {
+			Integer.parseInt(selectedTreatmentCode);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		return (m_student.completeTreatment(patientId, Integer.parseInt(selectedTreatmentCode)));
+
+
+	}
+
+	public boolean deleteTreatment(String patientId, String selectedTreatmentCode) {
+
+		try {
+			Integer.parseInt(selectedTreatmentCode);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		return (m_student.deleteTreatment(patientId, Integer.parseInt(selectedTreatmentCode)));
+	}
 }

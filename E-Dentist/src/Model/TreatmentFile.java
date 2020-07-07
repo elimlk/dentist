@@ -33,18 +33,21 @@ public class TreatmentFile implements Serializable// add observer
 		
 	}
 
-	public void StartTreatment(Treatment i_Treatment, long i_IdInstractor) {
-		//TODO
-	}
-	
-	public void CreateTreatment() {
-		//TODO
-		
-	}
-	
-	public void DeleteTreatment(long i_IdTreatment) {
-		//TODO
-		
+	public void addTreatment(Treatment treatment) {
+		m_Treatments.add(treatment);
 	}
 
+	public Treatment getTreatment(int treatmentIndex) {
+		if(treatmentIndex >=0 && treatmentIndex < m_Treatments.size())
+			return m_Treatments.get(treatmentIndex);
+		return null;
+	}
+
+	public void deleteTreatment(int treatmentIndex) {
+		m_Treatments.remove(treatmentIndex);
+	}
+
+	public void completeTreatment(Treatment treatment) {
+		treatment.complete();
+	}
 }

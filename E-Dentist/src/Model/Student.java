@@ -1,8 +1,10 @@
 package Model;
 
+import javax.xml.crypto.Data;
+import java.io.IOException;
 import java.util.*;
 
-import Enums.*;
+
 
 public class Student extends Person
 {
@@ -43,11 +45,11 @@ public class Student extends Person
 	}
 
 	public List<Integer> checkStatus() {
-
+		TypesOfTreatment typesOfTreatment = TypesOfTreatment.getInstance();
 		m_RequirementFromFile = m_RequirementFromFile.getInstance();
 		List<Integer> status = new ArrayList<Integer>();
 		
-		for (int i = 0; i < eTypeOfTreatment.SIZE.getIndex(); i++){
+		for (int i = 0; i < typesOfTreatment.getSize() ; i++){
 			
 			status.add(m_RequirementFromFile.getReq(i) - m_CurrentRequirement.getRequirement(i));
 		}
@@ -62,7 +64,7 @@ public class Student extends Person
 
 	}
 	
-	public boolean addPatient(String id, String firstName, String lastName, String phone, String email) {
+	public boolean addPatient(String id, String firstName, String lastName, String phone, String email) throws IOException {
 		
 		boolean patientNotExists = false;
 		Patient patient;
@@ -79,7 +81,39 @@ public class Student extends Person
 		return !patientNotExists;
 	
 	}
-	
+
+	public void addTreatment(String patientId, Treatment treatment){
+		DataManager data = DataManager.getInstance();
+		Patient patient = data.findPatientInData(patientId);
+		TreatmentFile file = patient.getM_treatmentFile();
+		file.addTreatment(treatment);
+	}
+
+
+	public boolean completeTreatment (String patientId, int treatmentIndex){
+		DataManager data = DataManager.getInstance();
+		Patient patient = data.findPatientInData(patientId);
+		Treatment treatment = patient.getM_treatmentFile().getTreatment(treatmentIndex);
+		if(treatment == null)
+			return false;
+		patient.getM_treatmentFile().completeTreatment(treatment);
+		return true;
+
+	}
+
+	public boolean deleteTreatment (String patientId, int treatmentIndex){
+		DataManager data = DataManager.getInstance();
+		Patient patient = data.findPatientInData(patientId);
+		TreatmentFile treatmentFile = patient.getM_treatmentFile();
+		Treatment treatment = treatmentFile.getTreatment(treatmentIndex);
+
+		if(treatment == null || treatment.getStatus())
+			return false;
+
+		treatmentFile.deleteTreatment(treatmentIndex);
+		return true;
+	}
+
 	public void DeletePatient(String idPatient) {
 		//TODO
 		

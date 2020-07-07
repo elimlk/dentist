@@ -42,4 +42,5 @@ public abstract class Person  implements Serializable {
 	public String getM_NumberPhone() {
 		return m_NumberPhone;
 	}
+
 }

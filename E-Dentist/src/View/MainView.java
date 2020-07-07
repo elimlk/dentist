@@ -3,6 +3,7 @@ package View;
 import Controller.InstructorController;
 import Controller.MainController;
 import Controller.StudentController;
+import Model.DataManager;
 import Model.Instructor;
 import Model.Person;
 import com.sun.tools.javac.Main;
@@ -108,12 +109,11 @@ public class MainView {
             break;
             
             case ("2"):
-              
+                DataManager data = DataManager.getInstance();
             	System.out.println("Enter validation key:");
                 validationKey = scanner.nextLine();
-              
-                if (validationKey.equals("1234")) // change to Enum
-                	
+
+                if (validationKey.equals(data.getRegisterKey()))
                     registertion(scanner,true);
                 
                 else

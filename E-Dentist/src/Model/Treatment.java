@@ -6,7 +6,6 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.text.*;
 import java.time.*;
 import java.time.format.*;
-import Enums.*;
 
 public class Treatment implements Serializable {
 
@@ -16,15 +15,16 @@ public class Treatment implements Serializable {
 	private String m_Type;
 	private int m_Grade;
 	private boolean m_treatmentStatus;
-	private static TypesOfTreatment type = new TypesOfTreatment();
 
 	
 	
 	public Treatment(String i_Description,String i_TreatmentBy,String i_ValidatedBy,int i_Type) {
+		TypesOfTreatment typesOfTreatment = TypesOfTreatment.getInstance();
+
 		m_Description = i_Description;
 		m_TreatmentBy = i_TreatmentBy;
 		m_ValidatedBy = i_ValidatedBy;
-		m_Type = type.typesArr[i_Type];
+		m_Type = typesOfTreatment.getType(i_Type);
 		m_treatmentStatus =false;
 		m_Grade = -1;
 
@@ -53,6 +53,14 @@ public class Treatment implements Serializable {
 
 	public void setM_Grade(int m_Grade) {
 		this.m_Grade = m_Grade;
+	}
+
+	public void complete() {
+		m_treatmentStatus=true;
+	}
+
+	public boolean getStatus(){
+		return m_treatmentStatus;
 	}
 }
 

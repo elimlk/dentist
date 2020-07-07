@@ -1,13 +1,9 @@
 package View;
 
 import Controller.StudentController;
-import Model.Student;
-
 import java.io.IOException;
-import java.nio.file.attribute.UserDefinedFileAttributeView;
 import java.util.List;
 import java.util.Scanner;
-import Enums.*;
 import Model.TypesOfTreatment;
 
 public class StudentView {
@@ -83,29 +79,53 @@ public class StudentView {
                         System.out.println("--------------------------------------------");
                         break;
                     case ("2"):
+                        completeTreatment(scanner,patientId);
                         break;
                     case ("3"):
+                        addTreatment(scanner,patientId);
                         break;
                     case ("4"):
+                        deletedTreatment(scanner,patientId);
                         break;
                     case ("b"):
-
                     case ("B"):
                         stayMenu = false;
                         break;
                     default:
                         break;
                 }
-
-
             }
-            /*
-                נדרש לייצר מזהה לכל טיפול כדי שהתחלת טיפול תהיה ע"פ מזהה מסויים
-            */
         }
     }
 
-    private void createNewPatient(Scanner scanner) {
+    private void deletedTreatment(Scanner scanner, String patientId) {
+        String selectedTreatmentCode;
+
+        System.out.println(m_studentController.showTreatments(patientId));
+        System.out.println("Select treatment code to delete (Please note - you cannot delete a completed treatment");
+        selectedTreatmentCode = scanner.nextLine();
+
+        if (m_studentController.deleteTreatment(patientId,selectedTreatmentCode))
+            System.out.println("Treatment deleted successfully");
+        else
+            System.out.println("Treatment deletion failed");
+    }
+
+    private void completeTreatment(Scanner scanner, String patientId) {
+        String selectedTreatmentCode;
+
+        System.out.println(m_studentController.showTreatments(patientId));
+        System.out.println("Select treatment code to start");
+        selectedTreatmentCode = scanner.nextLine();
+
+        if (m_studentController.completeTreatment(patientId,selectedTreatmentCode))
+            System.out.println("Treatment completed successfully - Wait for instructor approval");
+        else
+            System.out.println("Treatment completion failed");
+    }
+
+
+    private void createNewPatient(Scanner scanner) throws IOException {
         String id,firstName,lastName,phone,email;
 
         System.out.println("Enter id:");
@@ -131,11 +151,31 @@ public class StudentView {
     }
 
     private void showStatus() {
-        TypesOfTreatment typesOfTreatment = new TypesOfTreatment();
+        TypesOfTreatment typesOfTreatment = TypesOfTreatment.getInstance();
         List<Integer> currentReqStatus= m_studentController.checkStatus();
-        System.out.println("!--------------------------------------!");
-        for (int i=0; i < typesOfTreatment.typesArr.length ;i++)
-            System.out.println(typesOfTreatment.typesArr[i] + " treatment left to complete: " + currentReqStatus.get(i));
+        System.out.println("--------------------------------------------");
+        for (int i=0; i < typesOfTreatment.getSize() ;i++)
+            System.out.println(typesOfTreatment.getType(i) + " treatment left to complete: " + currentReqStatus.get(i));
+
+    }
+    private void addTreatment(Scanner scanner,String patientId) {
+        String i_Description;
+        String i_InstructorId;
+        String i_Type;
+        TypesOfTreatment typesOfTreatment = TypesOfTreatment.getInstance();
+        System.out.println("--------------------------------------------");
+        System.out.println("Enter description:");
+        i_Description = scanner.nextLine();
+        System.out.println("Enter instructor ID:");
+        i_InstructorId = scanner.nextLine();
+        System.out.println(typesOfTreatment);
+        System.out.println("Select treatment code from the above list");
+        i_Type = scanner.nextLine();
+        if (m_studentController.addTreatment(i_Description,i_InstructorId,i_Type, patientId)){
+            System.out.println("Added treatment successfully");
+        }else{
+            System.out.println("Instructor not found or type of treatment invalid");
+        }
 
     }
 }

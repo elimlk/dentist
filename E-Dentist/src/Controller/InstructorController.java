@@ -1,9 +1,21 @@
 package Controller;
 
+import Model.Instructor;
+import View.InstructorView;
+
+import java.util.Scanner;
+
 public class InstructorController {
 
-	public InstructorController() {
-		// TODO Auto-generated constructor stub
+	private Instructor m_Instructor;
+	private InstructorView m_InstructorView;
+
+	public InstructorController(Instructor instructor) {
+		m_Instructor = instructor;
+		m_InstructorView = new InstructorView(this);
 	}
 
+	public void start(Scanner scanner) {
+		m_InstructorView.start(scanner);
+	}
 }

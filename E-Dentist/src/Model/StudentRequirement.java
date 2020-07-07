@@ -1,7 +1,5 @@
 package Model;
 
-import Enums.eTypeOfTreatment;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +10,8 @@ public class StudentRequirement implements Serializable {
 
 	public StudentRequirement()
 	{
-		
-		int size = eTypeOfTreatment.SIZE.getIndex();
+		TypesOfTreatment typesOfTreatment = TypesOfTreatment.getInstance();
+		int size = typesOfTreatment.getSize();
 		
 		for(int i = 0 ;i < size; i++){
 		
