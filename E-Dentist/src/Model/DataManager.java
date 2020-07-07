@@ -175,26 +175,26 @@ public class DataManager
 	
 	}
 
+	public void addPatient(Patient patient) {
+
+		s_ListOfPatients.add(patient);
+	}
 
 	public boolean checkValidity(String id, String firstName, String lastName, String phone, String email) {
 
 		int id_int = 0;
 		boolean validInput = true;
-		String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+ 
-                "[a-zA-Z0-9_+&*-]+)*@" + 
+		String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+                "[a-zA-Z0-9_+&*-]+)*@" +
                 "(?:[a-zA-Z0-9-]+\\.)+[a-z A-Z]{2,7}$";
 		Pattern pattern = Pattern.compile(emailRegex);
 
 		if (id.length() != 9 || (pattern.matcher(email).matches() == false))
-			
+
 			validInput = !validInput;
 
 		return validInput;
-		
+
 	}
 
-	public void addPatient(Patient patient) {
-		
-		s_ListOfPatients.add(patient);
-	}
 }

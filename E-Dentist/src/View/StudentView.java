@@ -71,7 +71,7 @@ public class StudentView {
             while (stayMenu) {
                 System.out.println("what would you like to do?");
                 System.out.println("1. Show upcoming treatments");
-                System.out.println("2. Start a treatment");
+                System.out.println("2. Complete treatment");
                 System.out.println("3. Add a treatment");
                 System.out.println("4. Delete a treatment");
                 System.out.println("B to go back");
