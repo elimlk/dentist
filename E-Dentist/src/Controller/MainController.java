@@ -21,7 +21,7 @@ public class MainController {
         return (mainModel.login(id, password));
     }
 
-    public boolean register(String id, String firstName, String lastName, String phone, String email, String password, boolean instructor) {
+    public boolean register(String id, String firstName, String lastName, String phone, String email, String password, boolean instructor) throws IOException {
 
         return mainModel.register(id,firstName,lastName,phone,email,password,instructor);
 

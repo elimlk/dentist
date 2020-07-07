@@ -1,5 +1,7 @@
 package Model;
 
+import java.io.IOException;
+
 public class MainModel {
     
 	DataManager m_DataManager;
@@ -39,7 +41,7 @@ public class MainModel {
     
     }
 
-    public boolean register(String id, String firstName, String lastName, String phone, String email, String password, boolean instructor) {
+    public boolean register(String id, String firstName, String lastName, String phone, String email, String password, boolean instructor) throws IOException {
 
         if(!(m_DataManager.checkValidity(id, firstName, lastName, phone, email)))
             return false;

@@ -21,7 +21,7 @@ public class InstructorView {
         System.out.println("2. See all treatments under your supervision");
         System.out.println("3. Check student status (by ID)");
         System.out.println("999. Change global requirements");
-        return
+        //return
         /*
 
         שינוי באופן הכנסת הטיפול

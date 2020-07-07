@@ -129,7 +129,7 @@ public class MainView {
     }
 }
 
-    private void registertion(Scanner scanner,boolean instructor) {
+    private void registertion(Scanner scanner,boolean instructor) throws IOException {
         
     	String id,firstName,lastName,phone,email,password;
 
