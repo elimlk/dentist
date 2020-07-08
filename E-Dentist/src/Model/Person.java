@@ -43,4 +43,5 @@ public abstract class Person  implements Serializable {
 		return m_NumberPhone;
 	}
 
+	public abstract void update(Treatment treatment);
 }

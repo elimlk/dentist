@@ -73,7 +73,7 @@ public class StudentController {
 
 		Instructor instructor = (data.findInstructor(i_InstructorId));
 		if (!(instructor == null) && (Integer.parseInt(i_Type)>=0) && ((Integer.parseInt(i_Type)<typesOfTreatment.getSize()))){
-			treatment= new Treatment(i_Description,m_student.getM_ID(),i_InstructorId,Integer.parseInt(i_Type));
+			treatment= new Treatment(i_Description,m_student.getM_ID(),i_InstructorId,Integer.parseInt(i_Type),data.findPatientInData(patientId));
 			m_student.addTreatment(patientId,treatment);
 			return true;
 		}

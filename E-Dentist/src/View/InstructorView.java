@@ -33,6 +33,7 @@ public class InstructorView {
             userInput = scanner.nextLine();
             switch (userInput){
                 case ("1"):
+
                     break;
                 case ("2"):
                     showStudentStatus(scanner);

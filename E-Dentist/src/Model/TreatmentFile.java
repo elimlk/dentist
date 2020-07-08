@@ -13,7 +13,6 @@ public class TreatmentFile implements Serializable// add observer
 	public TreatmentFile() {
 		
 		m_Treatments = new ArrayList<Treatment>();
-		m_Treatments.add(new Treatment("clean 21 thoth","eli","ith",0));
 	
 	}
 

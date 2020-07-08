@@ -14,6 +14,7 @@ public class DataManager
 	private static List<Instructor> s_ListOfInstructors;
 	private static List<Patient> s_ListOfPatients;
 	private static Requirements s_Requirements;
+	private static List<Integer> s_listOfRequirements;
 
 	final String studentListFileName = "students_list.ser";
 	final String instructorFileName = "instructors_list.ser";
@@ -27,7 +28,8 @@ public class DataManager
 		s_ListOfStudents = new ArrayList<Student>();
 		s_ListOfInstructors = new ArrayList<Instructor>();
 		s_ListOfPatients = new ArrayList<Patient>();
-		s_Requirements = s_Requirements.getInstance();
+		s_listOfRequirements = new ArrayList<Integer>();
+		s_Requirements = Requirements.getInstance();
 		instructorRegisterKey = "1234";
 
 	}
@@ -38,7 +40,6 @@ public class DataManager
 		ObjectOutputStream oos;
 
 		try {
-			
 			fos = new FileOutputStream(studentListFileName);
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(s_ListOfStudents);
@@ -57,9 +58,10 @@ public class DataManager
 			oos.close();
 			fos.close();
 
+			s_listOfRequirements = Requirements.getInstance().getM_ListOfRequirement();
 			fos = new FileOutputStream(requirementsFileName);
 			oos = new ObjectOutputStream(fos);
-			oos.writeObject(s_Requirements);
+			oos.writeObject(s_listOfRequirements);
 			oos.close();
 			fos.close();
 			
@@ -98,9 +100,10 @@ public class DataManager
 
 			fis = new FileInputStream(requirementsFileName);
 			ois = new ObjectInputStream(fis);
-			s_Requirements = (Requirements) ois.readObject();
+			s_listOfRequirements = (ArrayList) ois.readObject();
 			ois.close();
 			fis.close();
+			Requirements.getInstance().setM_ListOfRequirement(s_listOfRequirements);
 
 		} catch (IOException e) {
 			
@@ -111,6 +114,12 @@ public class DataManager
 			e.printStackTrace();
 		
 		}
+		s_ListOfStudents.add(new Student("eliran","malka","302830617","0546375355","e@gamil.com","1234"));
+		s_ListOfInstructors.add(new Instructor("itamar","yacoby","123456789","0545545","e@ya.com","1234"));
+		s_ListOfPatients.add(new Patient("gabi","omer","123123123","056","gab@gmail.com"));
+		s_Requirements.updateRequirement(0,12);
+		s_Requirements.updateRequirement(2,5);
+		s_Requirements.updateRequirement(5,21);
 
 	}
 	

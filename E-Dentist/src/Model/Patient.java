@@ -11,10 +11,13 @@ public class Patient extends Person {
 	
 	}
 
+
 	public TreatmentFile getM_treatmentFile() {
-		
+
 		return m_treatmentFile;
-	
+
 	}
-	
+
+	@Override
+	public void update(Treatment treatment) {} // do  not nothing
 }

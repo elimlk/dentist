@@ -50,5 +50,9 @@ public class Instructor extends Person {
 		Requirements requirements = Requirements.getInstance();
 		requirements.updateRequirement(typeCode,value);
 	}
-	
+
+	@Override
+	public void update(Treatment treatment) {
+		//TODO
+	}
 }

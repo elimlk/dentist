@@ -15,7 +15,7 @@ public class Student extends Person
 	private String m_Password;
 	private StudentRequirement m_CurrentRequirement;
 	private Requirements m_RequirementFromFile;
-
+	private List<String> m_treatmentUpdates;
 	public Student() { }
 
 	public Student(String firstName, String lastName, String iD , String numberPhone, String email, String password)
@@ -25,6 +25,7 @@ public class Student extends Person
 		
 		m_Password = password;
 		m_CurrentRequirement = new StudentRequirement();
+		m_treatmentUpdates = new ArrayList<String>();
 		
 	}
 
@@ -114,10 +115,12 @@ public class Student extends Person
 		return true;
 	}
 
-	public void DeletePatient(String idPatient) {
-		//TODO
-		
+	@Override
+	public void update(Treatment treatment) {
+		String updateStr;
+		updateStr = treatment.getPatientInfo()+"was changed";
+		m_treatmentUpdates.add(updateStr);
 	}
-	
+	// להשלים קראיה לעדכון ע"י הסטודנט ויאו ולמחוק את הההעעעערה הזאת ממש אבל ממש מהקוד
 }
 

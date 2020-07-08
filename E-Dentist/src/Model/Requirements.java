@@ -6,8 +6,10 @@ import java.util.List;
 public class Requirements implements Serializable {
 
 	private static Requirements instance;
-	private List<Integer> m_ListOfRequirement;
-	private TypesOfTreatment typesOfTreatment = TypesOfTreatment.getInstance();
+	private static List<Integer> m_ListOfRequirement;
+	private static TypesOfTreatment typesOfTreatment = TypesOfTreatment.getInstance();
+
+
 	private Requirements() {
 		m_ListOfRequirement = new ArrayList<Integer>();
 		int size = typesOfTreatment.getSize();
@@ -32,13 +34,9 @@ public class Requirements implements Serializable {
 		
 		if (instance == null) {
 		
-			return new Requirements();
+			instance = new Requirements();
 		}
-		else {
-			
 			return instance;
-		}
-		
 	}
 	
 	public void updateRequirement(int index,int value){
@@ -64,10 +62,19 @@ public class Requirements implements Serializable {
 		return m_ListOfRequirement.get(index);
 	}
 
-	public Object readResolve(){
+	public List<Integer> getM_ListOfRequirement() {
+		return m_ListOfRequirement;
+	}
+
+	public void setM_ListOfRequirement(List<Integer> m_ListOfRequirement) {
+		Requirements.m_ListOfRequirement = m_ListOfRequirement;
+	}
+
+	protected  Object readResolve(){
 		
-		return getInstance();
+		return instance;
 	
 	}
+
 
 }
