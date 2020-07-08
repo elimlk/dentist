@@ -1,9 +1,10 @@
 package Model;
 
+import java.io.Serializable;
 import java.sql.Struct;
 import java.util.Arrays;
 
-public class TypesOfTreatment {
+public class TypesOfTreatment implements Serializable {
 
     private static TypesOfTreatment instance;
     private static String[] typesArr ;

@@ -34,9 +34,9 @@ public class MainView {
     		while (stayInApp)
             {
               
-            	System.out.println("1 to Login");
-                System.out.println("2 to Register");
-                System.out.println("Q to EXIT");
+            	System.out.println("1. to Login");
+                System.out.println("2. to Register");
+                System.out.println("Q. to EXIT");
 
                 String userInput = scanner.nextLine();
 

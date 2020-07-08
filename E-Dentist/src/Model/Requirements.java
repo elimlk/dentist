@@ -6,12 +6,11 @@ import java.util.List;
 public class Requirements implements Serializable {
 
 	private static Requirements instance;
-	private List<Integer> m_ListOfRequirement = new ArrayList<Integer>();
-
+	private List<Integer> m_ListOfRequirement;
+	private TypesOfTreatment typesOfTreatment = TypesOfTreatment.getInstance();
 	private Requirements() {
-		TypesOfTreatment typesOfTreatment = TypesOfTreatment.getInstance();
+		m_ListOfRequirement = new ArrayList<Integer>();
 		int size = typesOfTreatment.getSize();
-		
 		for(int i=0;i<size;i++) {
 			
 			m_ListOfRequirement.add(0);
@@ -20,6 +19,14 @@ public class Requirements implements Serializable {
 		
 	}
 
+	@Override
+	public String toString() {
+		String requiermentsStr;
+		requiermentsStr = "Global requirements is: ";
+		for(int i=0;i<typesOfTreatment.getSize();i++)
+			requiermentsStr += "("+i+")"+ typesOfTreatment.getType(i)+": "+m_ListOfRequirement.get(i)+"  ";
+		return requiermentsStr;
+	}
 
 	public static Requirements getInstance() {
 		

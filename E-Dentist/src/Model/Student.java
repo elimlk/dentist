@@ -66,19 +66,19 @@ public class Student extends Person
 	
 	public boolean addPatient(String id, String firstName, String lastName, String phone, String email) throws IOException {
 		
-		boolean patientNotExists = false;
+		boolean patientAdded = false;
 		Patient patient;
 		DataManager data = DataManager.getInstance();
 		
 		if(!(data.checkValidity(id,firstName,lastName,phone,email))) {
 			
-			return patientNotExists;
+			return patientAdded;
 		}
 		
 		patient = new Patient(firstName,lastName,id,phone,email);
 		data.addPatient(patient);
 		
-		return !patientNotExists;
+		return !patientAdded;
 	
 	}
 

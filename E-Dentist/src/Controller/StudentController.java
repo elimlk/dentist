@@ -33,9 +33,7 @@ public class StudentController {
 
 	public boolean createNewPatient(String id, String firstName, String lastName, String phone, String email) throws IOException {
 		
-		m_student.addPatient(id, firstName, lastName, phone, email);
-		
-		return true;
+		return m_student.addPatient(id, firstName, lastName, phone, email);
 	
 	}
 

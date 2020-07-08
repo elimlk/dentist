@@ -8,7 +8,7 @@ public class Instructor extends Person {
      
 	private String m_Email;
 	private String m_Password;
-
+	private List<Treatment> m_pendingTreatmentList;
 
 	public Instructor(String firstName, String lastName, String iD,
 		String numberPhone, String email, String password) 
@@ -16,6 +16,7 @@ public class Instructor extends Person {
 		
 	    super(firstName, lastName ,iD , numberPhone, email);
 	    m_Password = password;
+	    m_pendingTreatmentList = new ArrayList<Treatment>();
 		
 	}
 	
@@ -45,9 +46,9 @@ public class Instructor extends Person {
 		
 	}
 
-	public void ChangeRequirments(){
-		//TODO
-		
+	public void ChangeRequirments(int typeCode,int value){
+		Requirements requirements = Requirements.getInstance();
+		requirements.updateRequirement(typeCode,value);
 	}
 	
 }

@@ -4,6 +4,8 @@ import Controller.StudentController;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
+
+import Model.Requirements;
 import Model.TypesOfTreatment;
 
 public class StudentView {
@@ -23,9 +25,9 @@ public class StudentView {
                 System.out.println("--------------------------------------");
                 System.out.println("What do you like to do?");
                 System.out.println("1. Check requirements status");
-                System.out.println("2. open patient file(by ID)");
-                System.out.println("3. create new patient");
-                System.out.println("B to log out");
+                System.out.println("2. Open patient file(by ID)");
+                System.out.println("3. Create new patient");
+                System.out.println("B. Log out");
                 userInput = scanner.nextLine();
                 switch (userInput){
                     case("1"): {
@@ -70,7 +72,7 @@ public class StudentView {
                 System.out.println("2. Complete treatment");
                 System.out.println("3. Add a treatment");
                 System.out.println("4. Delete a treatment");
-                System.out.println("B to go back");
+                System.out.println("B. Go back");
                 userInput = scanner.nextLine();
                 switch (userInput){
                     case ("1"):
@@ -154,6 +156,7 @@ public class StudentView {
         TypesOfTreatment typesOfTreatment = TypesOfTreatment.getInstance();
         List<Integer> currentReqStatus= m_studentController.checkStatus();
         System.out.println("--------------------------------------------");
+        System.out.println(Requirements.getInstance().toString());
         for (int i=0; i < typesOfTreatment.getSize() ;i++)
             System.out.println(typesOfTreatment.getType(i) + " treatment left to complete: " + currentReqStatus.get(i));
 
