@@ -16,5 +16,6 @@ class MainModelTest {
         assertTrue(regValue);
         regValue = mainController.register("12123","Itamar","Yacoby","0545934997","ithamar000@gmail.com","1234",false);
         assertFalse(regValue);
+
     }
 }
