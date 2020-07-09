@@ -57,4 +57,16 @@ public class InstructorController {
 		}
 		return  "invalid type code or value incorrect";
 	}
+
+	public String showWaitingList() {
+		return m_Instructor.checkUpdates();
+	}
+
+	public boolean aproveTreatment(String userInput,String grade) {
+		return m_Instructor.aproveTrearment(userInput,grade);
+	}
+
+	public boolean pendingUpdates() {
+		return m_Instructor.pendingUpdates();
+	}
 }

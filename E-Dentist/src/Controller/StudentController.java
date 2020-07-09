@@ -103,4 +103,12 @@ public class StudentController {
 		}
 		return (m_student.deleteTreatment(patientId, Integer.parseInt(selectedTreatmentCode)));
 	}
+
+	public String checkUpdates() {
+		return m_student.getM_treatmentUpdates();
+	}
+
+	public String checkGraded() {
+		return m_student.getM_TreatmentGraded();
+	}
 }

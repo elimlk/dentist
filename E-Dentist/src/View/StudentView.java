@@ -27,6 +27,7 @@ public class StudentView {
                 System.out.println("1. Check requirements status");
                 System.out.println("2. Open patient file(by ID)");
                 System.out.println("3. Create new patient");
+                System.out.println("4. Check treatments updates");
                 System.out.println("B. Log out");
                 userInput = scanner.nextLine();
                 switch (userInput){
@@ -42,6 +43,10 @@ public class StudentView {
                         createNewPatient(scanner);
                         break;
                     }
+                    case ("4"):{
+                        checkUpdates();
+                        break;
+                    }
                     case ("B"):{
 
                     }
@@ -54,6 +59,13 @@ public class StudentView {
                 }
             }
 
+    }
+
+    private void checkUpdates() {
+        System.out.println("--------------------------------------------");
+        System.out.println(m_studentController.checkUpdates());
+        System.out.println("--------------------------------------------");
+        System.out.println(m_studentController.checkGraded());
     }
 
     private void openFilePatient(Scanner scanner) {

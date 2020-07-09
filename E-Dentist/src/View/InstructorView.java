@@ -33,7 +33,7 @@ public class InstructorView {
             userInput = scanner.nextLine();
             switch (userInput){
                 case ("1"):
-
+                    showWaitingTreatments(scanner);
                     break;
                 case ("2"):
                     showStudentStatus(scanner);
@@ -58,6 +58,30 @@ public class InstructorView {
         ההכנסה ראשונית ללא מדריך ובהשלמת הביצוע הוספת מדריך מבקר
 
          */
+    }
+
+    private void showWaitingTreatments(Scanner scanner) {
+        String TreatmentCode;
+        boolean stayMenu = true;
+
+        System.out.println("-------------------------------------");
+        System.out.println(m_InstructorController.showWaitingList());
+        System.out.println("-------------------------------------");
+        if (m_InstructorController.pendingUpdates()){
+            while (stayMenu) {
+                System.out.println("Enter treatment code to approve/disapprove. (press 'b' to go back)");
+                TreatmentCode = scanner.nextLine();
+                if (!(TreatmentCode.equals("b") || TreatmentCode.equals("B"))) {
+                    System.out.println("Enter grade: (enter '-1' to disapprove)");
+                    String grade = scanner.nextLine();
+                    if (m_InstructorController.aproveTreatment(TreatmentCode, grade)) {
+                        System.out.println("Treatment approved successfully");
+                    } else
+                        System.out.println("Wrong input ,try again");
+                } else
+                    stayMenu = false;
+            }
+        }
     }
 
     private void changeGlobalReq(Scanner scanner) {

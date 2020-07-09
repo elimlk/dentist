@@ -2,6 +2,9 @@ package Model;
 
 import javax.xml.crypto.Data;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 
@@ -15,7 +18,8 @@ public class Student extends Person
 	private String m_Password;
 	private StudentRequirement m_CurrentRequirement;
 	private Requirements m_RequirementFromFile;
-	private List<String> m_treatmentUpdates;
+	private List<Treatment> m_treatmentWaitingToApprove;
+	private List<Treatment> m_TreatmentGraded;
 	public Student() { }
 
 	public Student(String firstName, String lastName, String iD , String numberPhone, String email, String password)
@@ -25,8 +29,8 @@ public class Student extends Person
 		
 		m_Password = password;
 		m_CurrentRequirement = new StudentRequirement();
-		m_treatmentUpdates = new ArrayList<String>();
-		
+		m_treatmentWaitingToApprove = new ArrayList<Treatment>();
+		m_TreatmentGraded = new ArrayList<Treatment>();
 	}
 
 	public String getM_Email() {
@@ -41,8 +45,21 @@ public class Student extends Person
 		return m_Password;
 	}
 
-	public void setM_Password(String password) {
-		this.m_Password = password;
+	public String getM_treatmentUpdates() {
+		String updateStr = "Treatments waiting list is: \n";
+		if (m_treatmentWaitingToApprove.size() == 0)
+			updateStr="No new updates";
+		else {
+			for (Treatment treatment : m_treatmentWaitingToApprove)
+				updateStr += "	" + treatment.getM_DateCompleted() + " " + treatment.toString() + "changed status to 'COMPLETE'. Waiting for approval" + "\n";
+		}
+		return updateStr;
+	}
+	public String getM_TreatmentGraded(){
+		String updateStr = "Treatments graded list is: \n";
+		for(Treatment treatment : m_TreatmentGraded)
+			updateStr +="	"+treatment.getM_DateGraded()+" "+ treatment.toString()+" **New grade update!"+ "\n";
+		return updateStr;
 	}
 
 	public List<Integer> checkStatus() {
@@ -95,6 +112,7 @@ public class Student extends Person
 		DataManager data = DataManager.getInstance();
 		Patient patient = data.findPatientInData(patientId);
 		Treatment treatment = patient.getM_treatmentFile().getTreatment(treatmentIndex);
+
 		if(treatment == null)
 			return false;
 		patient.getM_treatmentFile().completeTreatment(treatment);
@@ -116,11 +134,22 @@ public class Student extends Person
 	}
 
 	@Override
-	public void update(Treatment treatment) {
-		String updateStr;
-		updateStr = treatment.getPatientInfo()+"was changed";
-		m_treatmentUpdates.add(updateStr);
+	public void updateAboutComplete(Treatment treatment) {
+		m_treatmentWaitingToApprove.add(treatment);
 	}
-	// להשלים קראיה לעדכון ע"י הסטודנט ויאו ולמחוק את הההעעעערה הזאת ממש אבל ממש מהקוד
+
+	@Override
+	public void updateAboutGrades(Treatment treatment) {
+		m_TreatmentGraded.add(treatment);
+	}
+
+
+	public void deleteTreatmentFromWaitinglist(Treatment treatment) {
+		m_treatmentWaitingToApprove.remove(treatment);
+	}
+
+	public void addTreatmentToGraded(Treatment treatment) {
+		m_TreatmentGraded.add(treatment);
+	}
 }
 

@@ -19,5 +19,8 @@ public class Patient extends Person {
 	}
 
 	@Override
-	public void update(Treatment treatment) {} // do  not nothing
+	public void updateAboutComplete(Treatment treatment) { }
+	@Override
+	public void updateAboutGrades(Treatment treatment) { }
+
 }

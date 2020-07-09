@@ -15,6 +15,8 @@ public class Treatment implements Serializable {
 	private String m_ValidatedBy;
 	private String m_Type;
 	private int m_Grade;
+	private String m_DateCompleted ="";
+	private String m_DateGraded ="";
 	private Patient m_patient;
 	private boolean m_treatmentStatus;
 
@@ -22,6 +24,7 @@ public class Treatment implements Serializable {
 	
 	public Treatment(String i_Description,String i_TreatmentBy,String i_ValidatedBy,int i_Type,Patient i_patient) {
 		TypesOfTreatment typesOfTreatment = TypesOfTreatment.getInstance();
+		DataManager data = DataManager.getInstance();
 		m_observerList = new ArrayList<Person>();
 		m_Description = i_Description;
 		m_TreatmentBy = i_TreatmentBy;
@@ -30,7 +33,8 @@ public class Treatment implements Serializable {
 		m_patient = i_patient;
 		m_treatmentStatus =false;
 		m_Grade = -1;
-
+		registerForUpdates(data.findStudent(i_TreatmentBy));
+		registerForUpdates(data.findInstructor(i_ValidatedBy));
 
 	}
 
@@ -58,14 +62,37 @@ public class Treatment implements Serializable {
 
 	public void setM_Grade(int m_Grade) {
 		this.m_Grade = m_Grade;
+		notifyObserversForGraded();
+	}
+
+
+
+	public String getTreatmentBy() {
+		return m_TreatmentBy;
 	}
 
 	public void complete() {
+		SimpleDateFormat dtf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		Date now = new Date();
 		m_treatmentStatus=true;
+		m_DateCompleted = dtf.format(now);
+		notifyObserversForComplete();
+	}
+
+	public String getM_DateCompleted() {
+		return m_DateCompleted;
+	}
+
+	public String getM_DateGraded() {
+		return m_DateGraded;
 	}
 
 	public boolean getStatus(){
 		return m_treatmentStatus;
+	}
+
+	public void setM_treatmentStatus(boolean m_treatmentStatus) {
+		this.m_treatmentStatus = m_treatmentStatus;
 	}
 
 	public void registerForUpdates(Person person){
@@ -75,13 +102,22 @@ public class Treatment implements Serializable {
 	{
 		m_observerList.remove(person);
 	}
-	public void notifyObservers(){
+	public void notifyObserversForComplete(){
 		for (Person person : m_observerList){
-			person.update(this);
+			person.updateAboutComplete(this);
+		}
+	}
+	private void notifyObserversForGraded() {
+		for (Person person : m_observerList){
+			person.updateAboutGrades(this);
 		}
 	}
 	public String getPatientInfo(){
 		return m_patient.getM_ID()+" ("+m_patient.getM_FirstNameOfPerson()+" "+m_patient.getM_LastNameOfPerson()+")";
+	}
+
+	public int getGrade() {
+		return m_Grade;
 	}
 }
 
