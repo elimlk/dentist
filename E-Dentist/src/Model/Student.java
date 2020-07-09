@@ -44,6 +44,10 @@ public class Student extends Person
 	public String getM_Password() {
 		return m_Password;
 	}
+	public void updateReq(int index){
+		m_CurrentRequirement.incRequirement(index);
+
+	}
 
 	public String getM_treatmentUpdates() {
 		String updateStr = "Treatments waiting list is: \n";

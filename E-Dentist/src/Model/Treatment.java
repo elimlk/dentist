@@ -71,6 +71,10 @@ public class Treatment implements Serializable {
 		return m_TreatmentBy;
 	}
 
+	public int getM_Type() {
+		return Integer.parseInt(m_Type);
+	}
+
 	public void complete() {
 		SimpleDateFormat dtf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		Date now = new Date();
