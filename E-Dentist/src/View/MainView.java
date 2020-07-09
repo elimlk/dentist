@@ -23,9 +23,8 @@ public class MainView {
     }
 
     public void start() throws IOException {
-        
-    	System.out.println("--------------------------------------");
-    	System.out.println("Welcome to E-Dentist");
+
+    	boxString("Welcome to E-Dentist");
         
     	boolean stayInApp = true;
         
@@ -161,7 +160,17 @@ public class MainView {
 
     }
 
+    private void boxString (String str){
+        int size = str.length();
+        for (int i = 0; i< size + 2; i++)
+            System.out.print("*");
 
+        System.out.println();
 
+        System.out.println("*"+str+"*");
+        for (int i = 0; i< size + 2; i++)
+            System.out.print("*");
 
+        System.out.println();
+    }
 }
