@@ -82,7 +82,7 @@ public class Instructor extends Person {
 				m_pendingTreatmentList.get(input).setM_Grade(gradeInt);
 				data.findStudent(studentID).deleteTreatmentFromWaitinglist(m_pendingTreatmentList.get(input));
 				data.findStudent(studentID).addTreatmentToGraded(m_pendingTreatmentList.get(input));
-				data.findStudent(studentID).updateReq(m_pendingTreatmentList.get(input).getM_Type());
+				//data.findStudent(studentID).updateReq(m_pendingTreatmentList.get(input).getM_Type());
 				m_pendingTreatmentList.remove(input);
 				return true;
 			}else if(gradeInt == -1) {
