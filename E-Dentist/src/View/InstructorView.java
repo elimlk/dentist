@@ -125,4 +125,20 @@ public class InstructorView {
             System.out.println("Student with id:'"+studentId+"' not found");
 
     }
+    public void boxString (String str){
+        int size = str.length();
+        for (int i = 0; i< size + 8; i++)
+            System.out.print("#");
+
+        System.out.println();
+
+        System.out.println("##  "+str+"  ##");
+        for (int i = 0; i< size + 8; i++)
+            System.out.print("#");
+
+        System.out.println();
+    }
+    public void outputString(String str){
+        System.out.println("## "+str + " ##");
+    }
 }

@@ -75,8 +75,6 @@ public class Instructor extends Person {
 				String studentID = m_pendingTreatmentList.get(input).getTreatmentBy();
 				m_pendingTreatmentList.get(input).setM_Grade(gradeInt);
 				data.findStudent(studentID).deleteTreatmentFromWaitinglist(m_pendingTreatmentList.get(input));
-				//data.findStudent(studentID).addTreatmentToGraded(m_pendingTreatmentList.get(input));
-				//TODO change student requirements. line below does not work
 				data.findStudent(studentID).updateReq(m_pendingTreatmentList.get(input).getM_TypeCode());
 				m_pendingTreatmentList.remove(input);
 				return true;

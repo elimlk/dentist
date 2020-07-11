@@ -11,7 +11,7 @@ import com.sun.tools.javac.Main;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class MainView {
+public class MainView{
     private final MainController mainController;
 
 
@@ -56,7 +56,7 @@ public class MainView {
                         break;
                         
                     default:
-                        System.out.println("Invalid input");
+                        outputString("Invalid input");
                         break;
                 }
 
@@ -79,14 +79,14 @@ public class MainView {
         if (loginAttempt != null)
         {
 
-            System.out.println("login success!");
+            outputString("login success!");
             System.out.println("Welcome "+loginAttempt.getM_FirstNameOfPerson());
             mainController.loginAccess(scanner,loginAttempt);
             
         }
         else
            
-        	System.out.println("User not found OR incorrect password");
+        	outputString("User not found OR incorrect password");
 
     }
 
@@ -117,12 +117,12 @@ public class MainView {
                 
                 else
                 	
-                    System.out.println("Wrong key");
+                    outputString("Wrong key");
                 
                 break;
                 
             default:
-                System.out.println("Invalid input");
+                outputString("Invalid input");
 
 
     }
@@ -152,25 +152,29 @@ public class MainView {
         
         if (mainController.register(id,firstName,lastName,phone,email, password,instructor))
           
-        	System.out.println("Registration successful");
+        	outputString("Registration successful");
         
         else
            
-        	System.out.println("One or more fields incorrect"); // add specific error code
+        	outputString("One or more fields incorrect"); // add specific error code
 
     }
 
-    private void boxString (String str){
+    public void boxString (String str){
         int size = str.length();
-        for (int i = 0; i< size + 2; i++)
-            System.out.print("*");
+        for (int i = 0; i< size + 8; i++)
+            System.out.print("#");
 
         System.out.println();
 
-        System.out.println("*"+str+"*");
-        for (int i = 0; i< size + 2; i++)
-            System.out.print("*");
+        System.out.println("##  "+str+"  ##");
+        for (int i = 0; i< size + 8; i++)
+            System.out.print("#");
 
         System.out.println();
     }
+    public void outputString(String str){
+        System.out.println("## "+str + " ##");
+    }
+
 }

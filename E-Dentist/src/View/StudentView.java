@@ -187,10 +187,27 @@ public class StudentView {
         System.out.println("Select treatment code from the above list");
         i_Type = scanner.nextLine();
         if (m_studentController.addTreatment(i_Description,i_InstructorId,i_Type, patientId)){
-            System.out.println("Added treatment successfully");
+            outputString("Added treatment successfully");
         }else{
-            System.out.println("Instructor not found or type of treatment invalid");
+            outputString("Instructor not found or type of treatment invalid");
         }
 
     }
+    public void boxString (String str){
+        int size = str.length();
+        for (int i = 0; i< size + 8; i++)
+            System.out.print("#");
+
+        System.out.println();
+
+        System.out.println("##  "+str+"  ##");
+        for (int i = 0; i< size + 8; i++)
+            System.out.print("#");
+
+        System.out.println();
+    }
+    public void outputString(String str){
+        System.out.println("## "+str + " ##");
+    }
+
 }
