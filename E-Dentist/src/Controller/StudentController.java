@@ -48,15 +48,23 @@ public class StudentController {
 		return PatientItsExists;
 	
 	}
+	public String showIncompleteTreatments(String patientId) {
+		TreatmentFile treatmentFile = m_student.findPatient(patientId).getM_treatmentFile();
+
+		String incompleteTreatmentFileString = treatmentFile.showIncompleteTreatments();
+
+		return incompleteTreatmentFileString;
+
+	}
 
 	public String showTreatments(String patientId) {
-		
+
 		TreatmentFile treatmentFile = m_student.findPatient(patientId).getM_treatmentFile();
-		
+
 		String treatmentFileString = treatmentFile.toString();
-		
+
 		return treatmentFileString;
-		
+
 	}
 
 	public boolean addTreatment(String i_Description, String i_InstructorId, String i_Type,String patientId) {
@@ -111,4 +119,5 @@ public class StudentController {
 	public String checkGraded() {
 		return m_student.getM_TreatmentGraded();
 	}
+
 }

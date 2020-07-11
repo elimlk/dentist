@@ -80,7 +80,7 @@ public class StudentView {
             outputString("Opened file!");
             while (stayMenu) {
                 System.out.println("what would you like to do?");
-                System.out.println("1. Show upcoming treatments");
+                System.out.println("1. Show treatments details");
                 System.out.println("2. Complete treatment");
                 System.out.println("3. Add a treatment");
                 System.out.println("4. Delete a treatment");
@@ -129,7 +129,7 @@ public class StudentView {
     private void completeTreatment(Scanner scanner, String patientId) {
         String selectedTreatmentCode;
 
-        System.out.println(m_studentController.showTreatments(patientId));
+        System.out.println(m_studentController.showIncompleteTreatments(patientId));
         System.out.println("Select treatment code to start");
         selectedTreatmentCode = scanner.nextLine();
 

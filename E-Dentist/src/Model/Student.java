@@ -53,7 +53,7 @@ public class Student extends Person
 		String updateStr = "Treatments waiting list is: \n";
 		String status ="";
 		if (m_treatmentWaitingToApprove.size() == 0)
-			updateStr="No new updates";
+			updateStr="No treatments waiting for approval";
 		else {
 			for (Treatment treatment : m_treatmentWaitingToApprove) {
 				status = (treatment.getStatus()) ? "COMPLETE" : "PENDDING";
@@ -122,8 +122,8 @@ public class Student extends Person
 
 		if(treatment == null)
 			return false;
-		patient.getM_treatmentFile().completeTreatment(treatment);
-		return true;
+		return (patient.getM_treatmentFile().completeTreatment(treatment));
+
 
 	}
 

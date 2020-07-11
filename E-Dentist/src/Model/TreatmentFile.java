@@ -46,7 +46,21 @@ public class TreatmentFile implements Serializable// add observer
 		m_Treatments.remove(treatmentIndex);
 	}
 
-	public void completeTreatment(Treatment treatment) {
-		treatment.complete();
+	public boolean completeTreatment(Treatment treatment) {
+		return (treatment.complete());
+	}
+
+	public String showIncompleteTreatments() {
+		String stringIncompleteTreatments = "";
+
+		for (int i = 0; i < m_Treatments.size(); i++)
+		{
+			if(m_Treatments.get(i).getStatus() == false)
+				stringIncompleteTreatments = stringIncompleteTreatments.concat("Treatment (" + i + ") " + m_Treatments.get(i).toString() + "\n");
+
+		}
+
+		return stringIncompleteTreatments;
+
 	}
 }

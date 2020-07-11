@@ -64,6 +64,9 @@ public class Treatment implements Serializable {
 
 	public void setM_Grade(int m_Grade) {
 		this.m_Grade = m_Grade;
+		SimpleDateFormat dtf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		Date now = new Date();
+		m_DateGraded = dtf.format(now);
 		notifyObserversForGraded();
 	}
 
@@ -81,12 +84,16 @@ public class Treatment implements Serializable {
 		return m_TypeCode;
 	}
 
-	public void complete() {
-		SimpleDateFormat dtf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		Date now = new Date();
-		m_treatmentStatus=true;
-		m_DateCompleted = dtf.format(now);
-		notifyObserversForComplete();
+	public boolean complete() {
+		if (m_treatmentStatus == false) {
+			SimpleDateFormat dtf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+			Date now = new Date();
+			m_treatmentStatus = true;
+			m_DateCompleted = dtf.format(now);
+			notifyObserversForComplete();
+			return true;
+		}
+		return false;
 	}
 
 	public String getM_DateCompleted() {

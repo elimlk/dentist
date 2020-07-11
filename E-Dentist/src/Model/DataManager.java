@@ -114,12 +114,12 @@ public class DataManager
 			e.printStackTrace();
 		
 		}
-		s_ListOfStudents.add(new Student("eliran","malka","302830617","0546375355","e@gamil.com","1234"));
+		/*s_ListOfStudents.add(new Student("eliran","malka","302830617","0546375355","e@gamil.com","1234"));
 		s_ListOfInstructors.add(new Instructor("itamar","yacoby","123456789","0545545","e@ya.com","1234"));
 		s_ListOfPatients.add(new Patient("gabi","omer","123123123","056","gab@gmail.com"));
 		s_Requirements.updateRequirement(0,12);
 		s_Requirements.updateRequirement(2,5);
-		s_Requirements.updateRequirement(5,21);
+		s_Requirements.updateRequirement(5,21);*/
 
 	}
 	
