@@ -26,7 +26,7 @@ public class StudentRequirement implements Serializable {
 		
 		int currentVal = m_ListOfRequirement.get(index);
 		
-		m_ListOfRequirement.set(index, currentVal++);
+		m_ListOfRequirement.set(index, ++currentVal);
 		
 	}
 	

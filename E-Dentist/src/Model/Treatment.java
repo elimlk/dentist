@@ -14,6 +14,7 @@ public class Treatment implements Serializable {
 	private String m_TreatmentBy;
 	private String m_ValidatedBy;
 	private String m_Type;
+	private int m_TypeCode;
 	private int m_Grade;
 	private String m_DateCompleted ="";
 	private String m_DateGraded ="";
@@ -30,6 +31,7 @@ public class Treatment implements Serializable {
 		m_TreatmentBy = i_TreatmentBy;
 		m_ValidatedBy = i_ValidatedBy;
 		m_Type = typesOfTreatment.getType(i_Type);
+		m_TypeCode = i_Type;
 		m_patient = i_patient;
 		m_treatmentStatus =false;
 		m_Grade = -1;
@@ -71,8 +73,12 @@ public class Treatment implements Serializable {
 		return m_TreatmentBy;
 	}
 
-	public int getM_Type() {
-		return Integer.parseInt(m_Type);
+	public String getM_Type() {
+		return m_Type;
+	}
+
+	public int getM_TypeCode() {
+		return m_TypeCode;
 	}
 
 	public void complete() {
