@@ -58,9 +58,9 @@ public class MainController {
 
         boolean inputWorng = true;
 
-        if (id.length() != 9 || !isNumeric(id)) {
+        if (id.length() != 9 || !(isNumeric(id))) {
 
-            throw new IllegalArgumentException("User or Password is not correct");
+            return !inputWorng;
 
         }
 
@@ -74,7 +74,6 @@ public class MainController {
         try {
 
             Integer.parseInt(id);
-            isNumeric = !isNumeric;
 
         } catch (NumberFormatException e) {
 
