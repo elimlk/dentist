@@ -7,59 +7,68 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-public class StudentController {
+public class StudentController
+{
 	
-	private Student m_student;
-	private StudentView m_studentView;
+	private Student m_Student;
+	private StudentView m_StudentView;
 	
-	public StudentController(Student student) throws IOException {
+	public StudentController(Student student) throws IOException 
+	{
 		
-		m_student = student;
-		m_studentView = new StudentView(this);
+		m_Student = student;
+		m_StudentView = new StudentView(this);
 	
 	}
 
-	public void start(Scanner scanner) throws IOException {
+	public void start(Scanner scanner) throws IOException
+	{
 		
-		m_studentView.start(scanner);
+		m_StudentView.start(scanner);
 	
 	}
 
-	public List<Integer> checkStatus() {
+	public List<Integer> checkStatus() 
+	{
 		
-		return m_student.checkStatus();
+		return m_Student.checkStatus();
 	
 	}
 
-	public boolean createNewPatient(String id, String firstName, String lastName, String phone, String email) throws IOException {
+	public boolean createNewPatient(String id, String firstName, String lastName, String phone, String email) throws IOException
+	{
 		
-		return m_student.addPatient(id, firstName, lastName, phone, email);
+		return m_Student.addPatient(id, firstName, lastName, phone, email);
 	
 	}
 
-
-	public boolean findPatient(String patientId) {
+	public boolean findPatient(String patientId) 
+	{
 		
 		boolean PatientItsExists; 
-		Patient patient = m_student.findPatient(patientId);
+		Patient patient = m_Student.findPatient(patientId);
 		
-		PatientItsExists = patient == null?false:true;
+		PatientItsExists = patient == null? false : true;
 		
 		return PatientItsExists;
 	
 	}
-	public String showIncompleteTreatments(String patientId) {
-		TreatmentFile treatmentFile = m_student.findPatient(patientId).getM_treatmentFile();
+	
+	public String showIncompleteTreatments(String patientId) 
+	{
+		
+		TreatmentFile treatmentFile = m_Student.findPatient(patientId).getM_treatmentFile();
 
-		String incompleteTreatmentFileString = treatmentFile.showIncompleteTreatments();
+		String incompleteTreatmentFileString = treatmentFile.showInCompleteTreatments();
 
 		return incompleteTreatmentFileString;
 
 	}
 
-	public String showTreatments(String patientId) {
+	public String showTreatments(String patientId)
+	{
 
-		TreatmentFile treatmentFile = m_student.findPatient(patientId).getM_treatmentFile();
+		TreatmentFile treatmentFile = m_Student.findPatient(patientId).getM_treatmentFile();
 
 		String treatmentFileString = treatmentFile.toString();
 
@@ -67,57 +76,92 @@ public class StudentController {
 
 	}
 
-	public boolean addTreatment(String i_Description, String i_InstructorId, String i_Type,String patientId) {
+	public boolean addTreatment(String description, String instructorId, String type, String patientId)
+	{
+	
+		boolean addTreatmentIsFailed = false;
 		DataManager data = DataManager.getInstance();
 		TypesOfTreatment typesOfTreatment = TypesOfTreatment.getInstance();
 		Treatment treatment;
 
-		try {
-			Integer.parseInt(i_Type);
-		} catch (NumberFormatException e) {
-			return false;
+		try
+		{
+			
+			Integer.parseInt(type);
+			
+		} 
+		catch (NumberFormatException e) 
+		{
+			
+			return addTreatmentIsFailed;
+			
 		}
 
+		Instructor instructor = (data.findInstructor(instructorId));
+		
+		if (!(instructor == null) && (Integer.parseInt(type) >= 0) && ((Integer.parseInt(type) < typesOfTreatment.getSize())))
+		{
+			
+			treatment= new Treatment(description, m_Student.getM_ID(), instructorId, Integer.parseInt(type),data.findPatientInData(patientId));
+			m_Student.addTreatment(patientId,treatment);
+			
+			addTreatmentIsFailed = !addTreatmentIsFailed;
+		
+		}	
 
-		Instructor instructor = (data.findInstructor(i_InstructorId));
-		if (!(instructor == null) && (Integer.parseInt(i_Type)>=0) && ((Integer.parseInt(i_Type)<typesOfTreatment.getSize()))){
-			treatment= new Treatment(i_Description,m_student.getM_ID(),i_InstructorId,Integer.parseInt(i_Type),data.findPatientInData(patientId));
-			m_student.addTreatment(patientId,treatment);
-			return true;
-		}
-		else
-			return false;
-
+		return addTreatmentIsFailed;
+		
 	}
 
-	public boolean completeTreatment(String patientId, String selectedTreatmentCode) {
+	public boolean completeTreatment(String patientId, String selectedTreatmentCode)
+	{
 
-		try {
+		try 
+		{
 			Integer.parseInt(selectedTreatmentCode);
-		} catch (NumberFormatException e) {
+			
+		} 
+		catch (NumberFormatException e)
+		{
+			
 			return false;
+			
 		}
-		return (m_student.completeTreatment(patientId, Integer.parseInt(selectedTreatmentCode)));
-
+		
+		return (m_Student.completeTreatment(patientId, Integer.parseInt(selectedTreatmentCode)));
 
 	}
 
-	public boolean deleteTreatment(String patientId, String selectedTreatmentCode) {
+	public boolean deleteTreatment(String patientId, String selectedTreatmentCode)
+	{
 
-		try {
+		try 
+		{
+			
 			Integer.parseInt(selectedTreatmentCode);
-		} catch (NumberFormatException e) {
+			
+		} 
+		catch (NumberFormatException e) 
+		{
 			return false;
 		}
-		return (m_student.deleteTreatment(patientId, Integer.parseInt(selectedTreatmentCode)));
+		
+		return (m_Student.deleteTreatment(patientId, Integer.parseInt(selectedTreatmentCode)));
+	
 	}
 
-	public String checkUpdates() {
-		return m_student.getM_treatmentUpdates();
+	public String checkUpdates() 
+	{
+		
+		return m_Student.getM_treatmentUpdates();
+		
 	}
 
-	public String checkGraded() {
-		return m_student.getM_TreatmentGraded();
+	public String checkGraded() 
+	{
+		
+		return m_Student.getM_TreatmentGraded();
+		
 	}
 
 }

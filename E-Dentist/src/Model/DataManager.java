@@ -34,12 +34,15 @@ public class DataManager
 
 	}
 
-	public void saveData () throws IOException {
+	public void saveData () throws IOException
+	{
 
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 
-		try {
+		try 
+		{
+			
 			fos = new FileOutputStream(studentListFileName);
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(s_ListOfStudents);
@@ -65,7 +68,9 @@ public class DataManager
 			oos.close();
 			fos.close();
 			
-		} catch (IOException e) {
+		} 
+		catch (IOException e)
+		{
 			
 			e.printStackTrace();
 			
@@ -73,12 +78,14 @@ public class DataManager
 
 	}
 
-	public void loadData() throws IOException, ClassNotFoundException {
+	public void loadData() throws IOException, ClassNotFoundException 
+	{
 		
 		FileInputStream fis;
 		ObjectInputStream ois;
 
-		try {
+		try 
+		{
 			
 			fis = new FileInputStream(studentListFileName);
 			ois = new ObjectInputStream(fis);
@@ -105,28 +112,34 @@ public class DataManager
 			fis.close();
 			Requirements.getInstance().setM_ListOfRequirement(s_listOfRequirements);
 
-		} catch (IOException e) {
-			
-			e.printStackTrace();
-		
-		} catch (ClassNotFoundException e) {
+		}
+		catch (IOException e)
+		{
 			
 			e.printStackTrace();
 		
 		}
-		s_ListOfStudents.add(new Student("eliran","malka","302830617","0546375355","e@gamil.com","1234"));
-		s_ListOfInstructors.add(new Instructor("itamar","yacoby","123456789","0545545","e@ya.com","1234"));
-		s_ListOfPatients.add(new Patient("gabi","omer","123123123","056","gab@gmail.com"));
-		s_Requirements.updateRequirement(0,12);
-		s_Requirements.updateRequirement(2,5);
-		s_Requirements.updateRequirement(5,21);
-
+		catch (ClassNotFoundException e)
+		{
+			
+			e.printStackTrace();
+		
+		}
+				
+	}
+	
+	public String getRegisterKey()
+	{
+		
+		return instructorRegisterKey;
+	
 	}
 	
 	public static DataManager getInstance()
 	{
 		
-		if (instance == null) {
+		if (instance == null)
+		{
 		
 			instance = new DataManager();
 		
@@ -138,11 +151,16 @@ public class DataManager
 
 	public Patient findPatientInData(String id)
 	{
-		for(Patient person : s_ListOfPatients){
+		
+		for(Patient person : s_ListOfPatients)
+		{
 			
-			if (person.getM_ID().equals(id))
+			if (person.getM_ID().equals(id)) 
+			{
 				
 				return person;
+				
+			}
 			
 		}
 		
@@ -150,72 +168,102 @@ public class DataManager
 		
 	}
 
-	public Instructor findInstructor(String id) {
+	public Instructor findInstructor(String id) 
+	{
 		
-		for(Instructor Instructor : s_ListOfInstructors){
+		for(Instructor Instructor : s_ListOfInstructors)
+		{
 			
-			if (Instructor.getM_ID().equals(id))
+			if (Instructor.getM_ID().equals(id)) 
+			{
 				
 				return Instructor;
+		
+			}
+		
 		}
 		
 		return null;
+		
 	}
 	
-	public Student findStudent(String id){
+	public Student findStudent(String id)
+	{
 		
-		for(Student student : s_ListOfStudents){
+		for(Student student : s_ListOfStudents)
+		{
 		
-			if (student.getM_ID().equals(id))
+			if (student.getM_ID().equals(id)) 
+			{
 			
 				return student;
+			
+			}
+			
 		}
-		
+					
 		return null;
+		
 	}
 
-	public void addInstructor(Instructor newInstructor) throws IOException {
+	public void addInstructor(Instructor newInstructor) throws IOException 
+	{
 		
 		s_ListOfInstructors.add(newInstructor);
-		saveData(); //Delete????????
+		saveData();
 	
 	}
 
-	public void addStudent(Student newStudent) throws IOException {
+	public void addStudent(Student newStudent) throws IOException
+	{
 		
 		s_ListOfStudents.add(newStudent);
-		saveData(); //Delete????????
+		saveData();
+		
 	}
 
-	public void addPatient(Patient patient) throws IOException {
+	public void addPatient(Patient patient) throws IOException 
+	{
 
 		s_ListOfPatients.add(patient);
-		saveData(); //Delete????????
+		saveData(); 
+		
 	}
 
-	public boolean checkValidity(String id, String firstName, String lastName, String phone, String email) {
-
-		try {
-			int id_int = Integer.parseInt(id);
-			int phone_int = Integer.parseInt(phone);
-		} catch (NumberFormatException e) {
-			return false;
+	public boolean checkValidity(String id, String firstName, String lastName, String phone, String email)
+	{
+		
+		boolean isNotValid = true;
+        		
+		try 
+		{
+			
+			 Integer.parseInt(id);
+			 Integer.parseInt(phone);
+			
 		}
-		boolean validInput = true;
+		catch (NumberFormatException e) 
+		{
+			
+			return false;
+			
+		}
+		
+		
 		String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
                 "[a-zA-Z0-9_+&*-]+)*@" +
                 "(?:[a-zA-Z0-9-]+\\.)+[a-z A-Z]{2,7}$";
 		Pattern pattern = Pattern.compile(emailRegex);
 
-		if (id.length() != 9 || (pattern.matcher(email).matches() == false))
+		if (id.length() != 9 || (pattern.matcher(email).matches() == false)) 
+		{
 
-			validInput = !validInput;
+			isNotValid = !isNotValid;
 
-		return validInput;
+		}
+			
+		return isNotValid;
 
 	}
-
-	public String getRegisterKey() {
-		return instructorRegisterKey;
-	}
+	
 }

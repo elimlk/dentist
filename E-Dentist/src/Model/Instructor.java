@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Instructor extends Person {
+public class Instructor extends Person
+{
      
 	private String m_Email;
 	private String m_Password;
@@ -20,84 +21,142 @@ public class Instructor extends Person {
 		
 	}
 	
-	public String getM_Email() {
+	public String getM_Email() 
+	{
+		
 		return m_Email;
+		
 	}
 
-	public void setM_Email(String email) {
+	public void setM_Email(String email) 
+	{
+		
 		this.m_Email = email;
+		
 	}
 
-	public String getM_Password() {
+	public String getM_Password()
+	{
+		
 		return m_Password;
+		
 	}
 
-	public void setM_Password(String password) {
+	public void setM_Password(String password)
+	{
+		
 		this.m_Password = password;
+		
+	}
+	
+	public boolean pendingUpdates() 
+	{
+		
+		return !(m_pendingTreatmentList.size() == 0);
+		
 	}
 
-	public void ChangeRequirments(int typeCode,int value){
+	public void ChangeRequirments(int typeCode, int value)
+	{
+		
 		Requirements requirements = Requirements.getInstance();
 		requirements.updateRequirement(typeCode,value);
+		
 	}
 
 	public String checkUpdates()
 	{
-		String updatesStr = "Treatments waiting your approval:\n";
-		if (m_pendingTreatmentList.size()==0)
+		
+		String updates = "Treatments waiting your approval:\n";
+		
+		if (m_pendingTreatmentList.size()==0) 
+		{
+			
 			return "No Treatment waiting for approval";
-		for(int i =0;i<m_pendingTreatmentList.size();i++){
-			updatesStr += "("+i+") "+"Treatment of patianet :"+m_pendingTreatmentList.get(i).toString()+"\n";
+			
 		}
-		return updatesStr;
+			
+		for(int i =0; i< m_pendingTreatmentList.size(); i++)
+		{
+			
+			updates += "("+i+") " + "Treatment of patianet :" + m_pendingTreatmentList.get(i).toString() + "\n";
+		
+		}
+		
+		return updates;
+		
 	}
+	
 	@Override
-	public void updateAboutComplete(Treatment treatment) {
+	public void updateAboutComplete(Treatment treatment)
+	{
+		
 		m_pendingTreatmentList.add(treatment);
+		
 	}
 
 	@Override
-	public void updateAboutDisapprove(Treatment treatment) {
-
-	}
+	public void updateAboutDisapprove(Treatment treatment) {}// do nothing
 
 	@Override
 	public void updateAboutGrades(Treatment treatment) { } // do nothing
 
 
-	public boolean aproveTrearment(String userInput,String grade){
+	public boolean aproveTrearment(String userInput, String grade)
+	{
+		
+		boolean aproveItsNotComplete = false;
 		int input = -999;
-		int gradeInt = -999;
+		int newGrade = -999;
 		DataManager data = DataManager.getInstance();
-		try {
+		
+		try 
+		{
+			
 			input = Integer.parseInt(userInput);
-			gradeInt = Integer.parseInt(grade);
-		} catch (NumberFormatException e) {
-			return false;
+			newGrade = Integer.parseInt(grade);
+			
+		}
+		catch (NumberFormatException e)
+		{
+			
+			return aproveItsNotComplete;
+		
 		}
 
-		if(input>=0 && input < m_pendingTreatmentList.size() ){
+		if(input >= 0 && input < m_pendingTreatmentList.size())
+		{
+		
 			String studentID = m_pendingTreatmentList.get(input).getTreatmentBy();
-			if((gradeInt>=0) && (gradeInt<= 100)) {
-				m_pendingTreatmentList.get(input).setM_Grade(gradeInt);
+			
+			if((newGrade >= 0) && (newGrade <= 100)) 
+			{
+				
+				m_pendingTreatmentList.get(input).setM_Grade(newGrade);
 				data.findStudent(studentID).deleteTreatmentFromWaitinglist(m_pendingTreatmentList.get(input));
 				data.findStudent(studentID).updateReq(m_pendingTreatmentList.get(input).getM_TypeCode());
 				m_pendingTreatmentList.remove(input);
-				return true;
+				
+				return !aproveItsNotComplete;
+				
 			}else
 				{
-				if(gradeInt == -1) {
+				if(newGrade == -1) 
+				{
+					
 					m_pendingTreatmentList.get(input).setM_treatmentStatus(false);
 					m_pendingTreatmentList.remove(input);
-					//data.findStudent(studentID).deleteTreatmentFromWaitinglist(m_pendingTreatmentList.get(input));
-					return true;
+					
+					return !aproveItsNotComplete;
+					
 				}
+				
 			}
+			
 		}
-		return false;
+		
+		return aproveItsNotComplete;
+		
 	}
-
-	public boolean pendingUpdates() {
-		return !(m_pendingTreatmentList.size() == 0);
-	}
+	
 }

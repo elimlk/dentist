@@ -7,9 +7,10 @@ import java.text.*;
 import java.time.*;
 import java.time.format.*;
 
-public class Treatment implements Serializable {
+public class Treatment implements Serializable
+{
 
-	private List<Person> m_observerList;
+	private List<Person> m_ObserverList;
 	private String m_Description;
 	private String m_TreatmentBy;
 	private String m_ValidatedBy;
@@ -18,132 +19,209 @@ public class Treatment implements Serializable {
 	private int m_Grade;
 	private String m_DateCompleted ="";
 	private String m_DateGraded ="";
-	private Patient m_patient;
-	private boolean m_treatmentStatus;
-
+	private Patient m_Patient;
+	private boolean m_TreatmentStatus;
 	
-	
-	public Treatment(String i_Description,String i_TreatmentBy,String i_ValidatedBy,int i_Type,Patient i_patient) {
+	public Treatment(String description,String treatmentBy,String validatedBy,int type,Patient patient)
+	{
+		
 		TypesOfTreatment typesOfTreatment = TypesOfTreatment.getInstance();
 		DataManager data = DataManager.getInstance();
-		m_observerList = new ArrayList<Person>();
-		m_Description = i_Description;
-		m_TreatmentBy = i_TreatmentBy;
-		m_ValidatedBy = i_ValidatedBy;
-		m_Type = typesOfTreatment.getType(i_Type);
-		m_TypeCode = i_Type;
-		m_patient = i_patient;
-		m_treatmentStatus =false;
+		m_ObserverList = new ArrayList<Person>();
+		m_Description = description;
+		m_TreatmentBy = treatmentBy;
+		m_ValidatedBy = validatedBy;
+		m_Type = typesOfTreatment.getType(type);
+		m_TypeCode = type;
+		m_Patient = patient;
+		m_TreatmentStatus =false;
 		m_Grade = -1;
-		registerForUpdates(data.findStudent(i_TreatmentBy));
-		registerForUpdates(data.findInstructor(i_ValidatedBy));
+		registerForUpdates(data.findStudent(treatmentBy));
+		registerForUpdates(data.findInstructor(validatedBy));
 
 	}
 
-
 	@Override
-	public String toString() {
-		String gradeStr;
-		String statusStr;
-		if (m_Grade == -1)
-			gradeStr = "Pending";
-		else
-			gradeStr = Integer.toString(m_Grade);
-		if(m_treatmentStatus == true)
-			statusStr = "COMPLETED";
-		else
-			statusStr = "PENDING";
-			return "{" +
+	public String toString()
+	{
+		
+		String grade;
+		String status;
+		
+		if (m_Grade == -1) 
+		{
+			
+			grade = "Pending";
+			
+		}
+		else 
+			
+			grade = Integer.toString(m_Grade);
+		
+			if(m_TreatmentStatus == true)
+			
+			     status = "COMPLETED";
+		    
+		    else 
+			
+			     status = "PENDING";
+			
+		        	
+		return "{" +
 					"Description='" + m_Description + '\'' +
 					",Treated By='" + m_TreatmentBy + '\'' +
 					", Validated By='" + m_ValidatedBy + '\'' +
-					", Type='" +m_Type + '\''+
-					", Grade ='" +gradeStr + '\'' +
-					", Treatment status ='" + statusStr +'\''+'}';
+					", Type='" + m_Type + '\''+
+					", Grade ='" + grade + '\'' +
+					", Treatment status ='" + status +'\''+'}';
+		
 	}
 
-	public void setM_Grade(int m_Grade) {
+	public void setM_Grade(int m_Grade)
+	{
+		
 		this.m_Grade = m_Grade;
 		SimpleDateFormat dtf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		Date now = new Date();
 		m_DateGraded = dtf.format(now);
 		notifyObserversForGraded();
+		
 	}
 
-
-
-	public String getTreatmentBy() {
+	public String getTreatmentBy() 
+	{
+		
 		return m_TreatmentBy;
+		
 	}
 
-	public String getM_Type() {
+	public String getM_Type() 
+	{
+		
 		return m_Type;
+		
 	}
 
-	public int getM_TypeCode() {
+	public int getM_TypeCode()
+	{
+		
 		return m_TypeCode;
+		
 	}
 
-	public boolean complete() {
-		if (m_treatmentStatus == false) {
+	public boolean complete() 
+	{
+		boolean complete = false;
+		
+		if (m_TreatmentStatus == false)
+		{
+			
 			SimpleDateFormat dtf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 			Date now = new Date();
-			m_treatmentStatus = true;
+			m_TreatmentStatus = true;
 			m_DateCompleted = dtf.format(now);
 			notifyObserversForComplete();
-			return true;
+			complete = !complete;
+			
 		}
-		return false;
+		
+		return complete;
+		
 	}
 
-	public String getM_DateCompleted() {
+	public String getM_DateCompleted() 
+	{
+		
 		return m_DateCompleted;
+		
 	}
 
-	public String getM_DateGraded() {
+	public String getM_DateGraded() 
+	{
+		
 		return m_DateGraded;
+		
 	}
 
-	public boolean getStatus(){
-		return m_treatmentStatus;
+	public boolean getStatus()
+	{
+		
+		return m_TreatmentStatus;
+		
 	}
-
-	public void setM_treatmentStatus(boolean m_treatmentStatus) {
-		this.m_treatmentStatus = m_treatmentStatus;
+	
+	public int getGrade()
+	{
+		
+		return m_Grade;
+		
+	}
+	
+	public void setM_treatmentStatus(boolean treatmentStatus) 
+	{
+		
+		this.m_TreatmentStatus = treatmentStatus;
 		notifyObserversForDisapprove();
+		
 	}
 
-
-	public void registerForUpdates(Person person){
-		m_observerList.add(person);
+	public void registerForUpdates(Person person)
+	{
+		
+		m_ObserverList.add(person);
+		
 	}
+	
 	public void unregisterFromUpdates(Person person)
 	{
-		m_observerList.remove(person);
+		
+		m_ObserverList.remove(person);
+		
 	}
 
-	private void notifyObserversForDisapprove() {
-		for (Person person : m_observerList){
+	private void notifyObserversForDisapprove()
+	{
+		
+		for (Person person : m_ObserverList)
+		{
+			
 			person.updateAboutDisapprove(this);
+			
 		}
+		
 	}
-	public void notifyObserversForComplete(){
-		for (Person person : m_observerList){
+	
+	public void notifyObserversForComplete()
+	{
+		
+		for (Person person : m_ObserverList)
+		{
+			
 			person.updateAboutComplete(this);
+			
 		}
+		
 	}
-	private void notifyObserversForGraded() {
-		for (Person person : m_observerList){
+	
+	private void notifyObserversForGraded() 
+	{
+		
+		for (Person person : m_ObserverList)
+		{
+			
 			person.updateAboutGrades(this);
+			
 		}
+		
 	}
-	public String getPatientInfo(){
-		return m_patient.getM_ID()+" ("+m_patient.getM_FirstNameOfPerson()+" "+m_patient.getM_LastNameOfPerson()+")";
+	
+	public String getPatientInfo()
+	{
+		
+		return m_Patient.getM_ID() + " (" + m_Patient.getM_FirstNameOfPerson() + " " + m_Patient.getM_LastNameOfPerson() + ")";
+	
 	}
-
-	public int getGrade() {
-		return m_Grade;
-	}
+	
 }
 
 

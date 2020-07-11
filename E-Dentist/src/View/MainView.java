@@ -11,24 +11,28 @@ import com.sun.tools.javac.Main;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class MainView{
+public class MainView
+{
+	
     private final MainController mainController;
 
 
-    public MainView() {
+    public MainView() 
+    {
      
     	mainController = new MainController();
-
         
     }
 
-    public void start() throws IOException {
+    public void start() throws IOException
+    {
 
     	boxString("Welcome to E-Dentist");
         
     	boolean stayInApp = true;
         
-    	try (Scanner scanner = new Scanner(System.in)){
+    	try (Scanner scanner = new Scanner(System.in))
+    	{
            
     		while (stayInApp)
             {
@@ -58,6 +62,7 @@ public class MainView{
                     default:
                         outputString("Invalid input");
                         break;
+                        
                 }
 
             }
@@ -66,7 +71,8 @@ public class MainView{
 
     }
 
-    public void login(Scanner scanner) throws IOException{
+    public void login(Scanner scanner) throws IOException
+    {
       
     	System.out.println("--------------------------------------");
     	System.out.println("Enter id: ");
@@ -84,13 +90,15 @@ public class MainView{
             mainController.loginAccess(scanner,loginAttempt);
             
         }
-        else
+        else {
            
         	outputString("User not found OR incorrect password");
-
+        }
+        
     }
 
-    public void register(Scanner scanner) throws IOException{
+    public void register(Scanner scanner) throws IOException
+    {
         
     	System.out.println("--------------------------------------");
         System.out.println("1 to register as student");
@@ -101,8 +109,8 @@ public class MainView{
       
         switch (input)
         {
-            case ("1"):
-            	
+        
+            case ("1"):      	
                 registertion(scanner,false);
               
             break;
@@ -112,25 +120,31 @@ public class MainView{
             	System.out.println("Enter validation key:");
                 validationKey = scanner.nextLine();
 
-                if (validationKey.equals(data.getRegisterKey()))
-                    registertion(scanner,true);
+                if (validationKey.equals(data.getRegisterKey())) 
+                {
+                 
+                	registertion(scanner, true);
+                }
                 
-                else
+                else {
                 	
                     outputString("Wrong key");
+                
+                }
                 
                 break;
                 
             default:
                 outputString("Invalid input");
 
-
     }
-}
 
-    private void registertion(Scanner scanner,boolean instructor) throws IOException {
+ }
+
+    private void registertion(Scanner scanner,boolean instructor) throws IOException 
+    {
         
-    	String id,firstName,lastName,phone,email,password;
+    	String id, firstName, lastName, phone, email, password;
 
         System.out.println("Enter id:");
         id = scanner.nextLine();
@@ -150,31 +164,53 @@ public class MainView{
         System.out.println("Enter password: ");
         password = scanner.nextLine();
         
-        if (mainController.register(id,firstName,lastName,phone,email, password,instructor))
+        if (mainController.register(id, firstName, lastName, phone, email, password, instructor)) 
+        {
           
         	outputString("Registration successful");
         
-        else
+        }
+        else 
+        {
            
         	outputString("One or more fields incorrect"); // add specific error code
-
+        
+        }
+        
     }
 
-    public void boxString (String str){
-        int size = str.length();
-        for (int i = 0; i< size + 8; i++)
-            System.out.print("#");
-
+    public void boxString (String printOutput)
+    {
+    	
+        int size = printOutput.length();
+        
+        for (int i = 0; i < size + 8; i++) 
+        {
+         
+        	System.out.print("#");
+        	
+        }
+        
         System.out.println();
 
-        System.out.println("##  "+str+"  ##");
-        for (int i = 0; i< size + 8; i++)
-            System.out.print("#");
-
+        System.out.println("##  "+ printOutput +"  ##");
+        
+        for (int i = 0; i < size + 8; i++) 
+        {
+        
+        	System.out.print("#");
+        
+        }
+        
         System.out.println();
+        
     }
-    public void outputString(String str){
-        System.out.println("## "+str + " ##");
+    
+    public void outputString(String printOutput)
+    {
+    	
+        System.out.println("## "+ printOutput + " ##");
+        
     }
 
 }

@@ -3,45 +3,69 @@ package Model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-public class Requirements implements Serializable {
+
+public class Requirements implements Serializable
+{
 
 	private static Requirements instance;
-	private static List<Integer> m_ListOfRequirement;
+	private static List<Integer> s_ListOfRequirement;
 	private static TypesOfTreatment typesOfTreatment = TypesOfTreatment.getInstance();
 
-
-	private Requirements() {
-		m_ListOfRequirement = new ArrayList<Integer>();
+	private Requirements()
+	{
+		
+		s_ListOfRequirement = new ArrayList<Integer>();
 		int size = typesOfTreatment.getSize();
-		for(int i=0;i<size;i++) {
+		
+		for(int i=0; i < size; i++) 
+		{
 			
-			m_ListOfRequirement.add(0);
+			s_ListOfRequirement.add(0);
 			
 		}
 		
 	}
 
 	@Override
-	public String toString() {
+	public String toString()
+	{
+		
 		String requiermentsStr;
 		requiermentsStr = "Global requirements is: ";
-		for(int i=0;i<typesOfTreatment.getSize();i++)
-			requiermentsStr += "("+i+")"+ typesOfTreatment.getType(i)+": "+m_ListOfRequirement.get(i)+"  ";
+		
+		for(int i = 0; i < typesOfTreatment.getSize(); i++)
+		
+			requiermentsStr += "("+i+")" + typesOfTreatment.getType(i) + ": " + s_ListOfRequirement.get(i) + "  ";
+		
 		return requiermentsStr;
-	}
-
-	public static Requirements getInstance() {
-		
-		if (instance == null) {
-		
-			instance = new Requirements();
-		}
-			return instance;
+	
 	}
 	
-	public void updateRequirement(int index,int value){
+	protected  Object readResolve()
+	{
 		
-		m_ListOfRequirement.set(index,value);
+		return instance;
+	
+	}
+
+	public static Requirements getInstance()
+	{
+		
+		if (instance == null) 
+		{
+		
+			instance = new Requirements();
+			
+		}
+		
+			return instance;
+			
+	}
+	
+	public void updateRequirement(int index, int value)
+	{
+		
+		s_ListOfRequirement.set(index, value);
 		
 	}
 
@@ -51,30 +75,31 @@ public class Requirements implements Serializable {
 		for(int i = 0; i < listOfRequirement.size(); i++)
 		{
 			
-			listOfRequirement.set(i,listOfRequirement.get(i));
+			listOfRequirement.set(i, listOfRequirement.get(i));
 		
 		}
 		
 	}
 
-	public int getReq(int index){
+	public int getRequirement(int index)
+	{
 		
-		return m_ListOfRequirement.get(index);
-	}
-
-	public List<Integer> getM_ListOfRequirement() {
-		return m_ListOfRequirement;
-	}
-
-	public void setM_ListOfRequirement(List<Integer> m_ListOfRequirement) {
-		Requirements.m_ListOfRequirement = m_ListOfRequirement;
-	}
-
-	protected  Object readResolve(){
+		return s_ListOfRequirement.get(index);
 		
-		return instance;
-	
 	}
 
+	public List<Integer> getM_ListOfRequirement() 
+	{
+		
+		return s_ListOfRequirement;
+		
+	}
+
+	public void setM_ListOfRequirement(List<Integer> listOfRequirement)
+	{
+		
+		Requirements.s_ListOfRequirement = listOfRequirement;
+		
+	}
 
 }

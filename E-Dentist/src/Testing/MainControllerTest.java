@@ -12,7 +12,8 @@ import org.junit.jupiter.api.Assertions;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class MainControllerTest {
+public class MainControllerTest
+{
 
     private Person m_Person;
     private Person m_Person1;
@@ -28,7 +29,6 @@ public class MainControllerTest {
         m_Person = new Student("Lior","kricheli", "203382494","0545347723", "Lior@gmail.com", "lior121212" );
         m_Person1 = new Instructor("Gabi","Omer", "204344626","0545347732", "gabi@gmail.com", "gabi121212" );
         m_Data.addStudent((Student)m_Person);
-
 
     }
 

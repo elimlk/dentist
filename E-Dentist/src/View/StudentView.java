@@ -10,18 +10,24 @@ import Model.TypesOfTreatment;
 
 public class StudentView {
 
-    StudentController m_studentController;
+    StudentController m_StudentController;
 
-    public StudentView(StudentController studentController) {
-        m_studentController = studentController;
+    public StudentView(StudentController studentController) 
+    {
+    	
+        m_StudentController = studentController;
+        
     }
 
-    public void start(Scanner scanner) throws IOException {
-        //Runtime.getRuntime().exec("cls");
+    public void start(Scanner scanner) throws IOException
+    {
+        
         boolean stayMenu = true;
-
         String userInput;
-            while (stayMenu) {
+        
+            while (stayMenu)
+            {
+            	
                 System.out.println("--------------------------------------");
                 System.out.println("What do you like to do?");
                 System.out.println("1. Check requirements status");
@@ -29,119 +35,170 @@ public class StudentView {
                 System.out.println("3. Create new patient");
                 System.out.println("4. Check treatments updates");
                 System.out.println("B. Log out");
+                
                 userInput = scanner.nextLine();
-                switch (userInput){
-                    case("1"): {
+                
+                switch (userInput)
+                {
+                
+                    case("1"): 
                         showStatus();
                         break;
-                    }
-                    case ("2"):{
+                    
+                    case ("2"):
                         openFilePatient(scanner);
                         break;
-                    }
-                    case ("3"):{
+                    
+                    case ("3"):
                         createNewPatient(scanner);
                         break;
-                    }
-                    case ("4"):{
+                    
+                    case ("4"):
                         checkUpdates();
                         break;
-                    }
-                    case ("B"):{
-
-                    }
-                    case ("b"):{
+                    
+                    case ("B"):                
+                    case ("b"):
                         stayMenu = false;
                         break;
-                    }
+                    
                     default:
                         System.out.println("Invalid input");
+                        
                 }
+                
             }
 
     }
-
-    private void checkUpdates() {
+    
+    private void checkUpdates() 
+    {
+    	
         System.out.println("--------------------------------------------");
-        System.out.println(m_studentController.checkUpdates());
+        System.out.println(m_StudentController.checkUpdates());
         System.out.println("--------------------------------------------");
-        System.out.println(m_studentController.checkGraded());
+        System.out.println(m_StudentController.checkGraded());
+        
     }
 
-    private void openFilePatient(Scanner scanner) {
+    private void openFilePatient(Scanner scanner) 
+    {
+    	
         String patientId;
-        String userInput; // user input in sub menu
+        String userInputInSubMenu; 
         boolean stayMenu = true;
+        
         System.out.println("Enter patient ID:");
         patientId = scanner.nextLine();
-        if(!(m_studentController.findPatient(patientId)))
-            System.out.println("Patient with id: " +patientId+ "not found!");
-        else {
+        
+        if(!(m_StudentController.findPatient(patientId))) 
+        {
+        	
+            System.out.println("Patient with id: " + patientId + "not found!");
+            
+        }
+         else {
+        	 
             outputString("Opened file!");
-            while (stayMenu) {
+            
+            while (stayMenu)
+            {
+            	
                 System.out.println("what would you like to do?");
                 System.out.println("1. Show treatments details");
                 System.out.println("2. Complete treatment");
                 System.out.println("3. Add a treatment");
                 System.out.println("4. Delete a treatment");
                 System.out.println("B. Go back");
-                userInput = scanner.nextLine();
-                switch (userInput){
+                userInputInSubMenu = scanner.nextLine();
+                
+                switch (userInputInSubMenu)
+                {
+                
                     case ("1"):
                         System.out.println("--------------------------------------------");
-                        System.out.println(m_studentController.showTreatments(patientId));
+                        System.out.println(m_StudentController.showTreatments(patientId));
                         System.out.println("--------------------------------------------");
                         break;
+                    
                     case ("2"):
-                        completeTreatment(scanner,patientId);
+                        completeTreatment(scanner, patientId);
                         break;
+                   
                     case ("3"):
-                        addTreatment(scanner,patientId);
+                        addTreatment(scanner, patientId);
                         break;
+                   
                     case ("4"):
-                        deletedTreatment(scanner,patientId);
+                        deletedTreatment(scanner, patientId);
                         break;
+                   
                     case ("b"):
                     case ("B"):
                         clearScreen();
                         stayMenu = false;
                         break;
+                    
                     default:
                         break;
+                        
                 }
+                
             }
+            
         }
+        
     }
 
-    private void deletedTreatment(Scanner scanner, String patientId) {
+    private void deletedTreatment(Scanner scanner, String patientId) 
+    {
+    	
         String selectedTreatmentCode;
 
-        System.out.println(m_studentController.showTreatments(patientId));
+        System.out.println(m_StudentController.showTreatments(patientId));
         System.out.println("Select treatment code to delete (Please note - you cannot delete a completed treatment");
         selectedTreatmentCode = scanner.nextLine();
 
-        if (m_studentController.deleteTreatment(patientId,selectedTreatmentCode))
-            outputString("Treatment deleted successfully");
-        else
+        if (m_StudentController.deleteTreatment(patientId,selectedTreatmentCode)) 
+        {
+       
+        	outputString("Treatment deleted successfully");
+        
+        }
+        else {
+        	
             outputString("Treatment deletion failed");
+    
+        }
+        
     }
-
-    private void completeTreatment(Scanner scanner, String patientId) {
+    
+    private void completeTreatment(Scanner scanner, String patientId)
+    {
         String selectedTreatmentCode;
 
-        System.out.println(m_studentController.showIncompleteTreatments(patientId));
+        System.out.println(m_StudentController.showIncompleteTreatments(patientId));
         System.out.println("Select treatment code to start");
         selectedTreatmentCode = scanner.nextLine();
 
-        if (m_studentController.completeTreatment(patientId,selectedTreatmentCode))
+        if (m_StudentController.completeTreatment(patientId,selectedTreatmentCode)) 
+        {
+        	
             outputString("Treatment completed successfully - Wait for instructor approval");
-        else
-            outputString("Treatment completion failed");
+        
+        }
+        else {
+        	
+        	outputString("Treatment completion failed");
+        	
+        }
+            
     }
 
-
-    private void createNewPatient(Scanner scanner) throws IOException {
-        String id,firstName,lastName,phone,email;
+    private void createNewPatient(Scanner scanner) throws IOException 
+    {
+    	
+        String id, firstName, lastName, phone, email;
 
         System.out.println("Enter id:");
         id = scanner.nextLine();
@@ -158,60 +215,109 @@ public class StudentView {
         System.out.println("Enter patient Email:");
         email = scanner.nextLine();
 
-        if (m_studentController.createNewPatient(id,firstName,lastName,phone,email))
+        if (m_StudentController.createNewPatient(id, firstName, lastName, phone, email)) 
+        {
             outputString("Patient added successfully");
-        else
-            outputString("Failed to add patient.");
-
+        }
+         else {
+          
+        	 outputString("Failed to add patient.");
+         
+         }
+        
     }
 
-    private void showStatus() {
+    private void showStatus() 
+    {
+    	
         TypesOfTreatment typesOfTreatment = TypesOfTreatment.getInstance();
-        List<Integer> currentReqStatus= m_studentController.checkStatus();
+        List<Integer> currentReqStatus= m_StudentController.checkStatus();
+        
         System.out.println("--------------------------------------------");
         System.out.println(Requirements.getInstance().toString());
-        for (int i=0; i < typesOfTreatment.getSize() ;i++)
-            System.out.println(typesOfTreatment.getType(i) + " treatment left to complete: " + currentReqStatus.get(i));
-
+       
+        for (int i = 0; i < typesOfTreatment.getSize(); i++) 
+        {
+         
+        	System.out.println(typesOfTreatment.getType(i) + " treatment left to complete: " + currentReqStatus.get(i));
+        
+        }
+        
     }
-    private void addTreatment(Scanner scanner,String patientId) {
-        String i_Description;
-        String i_InstructorId;
-        String i_Type;
+    
+    private void addTreatment(Scanner scanner,String patientId) 
+    {
+    	
+        String description;
+        String instructorId;
+        String type;
         TypesOfTreatment typesOfTreatment = TypesOfTreatment.getInstance();
+       
         System.out.println("--------------------------------------------");
         System.out.println("Enter description:");
-        i_Description = scanner.nextLine();
+        description = scanner.nextLine();
+        
         System.out.println("Enter instructor ID:");
-        i_InstructorId = scanner.nextLine();
+        instructorId = scanner.nextLine();
+        
         System.out.println(typesOfTreatment);
         System.out.println("Select treatment code from the above list");
-        i_Type = scanner.nextLine();
-        if (m_studentController.addTreatment(i_Description,i_InstructorId,i_Type, patientId)){
+        type = scanner.nextLine();
+        
+        if (m_StudentController.addTreatment(description, instructorId, type, patientId))
+        {
+        	
             outputString("Added treatment successfully");
-        }else{
+            
+        }
+        else{
+        	
             outputString("Instructor not found or type of treatment invalid");
+     
         }
 
     }
-    public void boxString (String str){
-        int size = str.length();
-        for (int i = 0; i< size + 8; i++)
-            System.out.print("#");
-
+    
+    public void boxString (String printOutput)
+    {
+    	
+        int size = printOutput.length();
+        
+        for (int i = 0; i < size + 8; i++)
+        {
+         
+        	System.out.print("#");
+        
+        }
+        
         System.out.println();
 
-        System.out.println("##  "+str+"  ##");
-        for (int i = 0; i< size + 8; i++)
-            System.out.print("#");
+        System.out.println("##  " + printOutput + "  ##");
+        
+        for (int i = 0; i < size + 8; i++) 
+        {
 
+        	System.out.print("#");
+        
+        }
+        
         System.out.println();
+        
     }
-    public void outputString(String str){
-        System.out.println("## "+str + " ##");
+    
+    public void outputString(String printOutput)
+    {
+    	
+        System.out.println("## " + printOutput + " ##");
+    
     }
-    public static void clearScreen() {
+    
+    public static void clearScreen()
+     {
+    	
         System.out.print("\033[H\033[2J");
         System.out.flush();
+        
     }
+    
 }

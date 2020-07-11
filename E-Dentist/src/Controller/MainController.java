@@ -8,21 +8,28 @@ import View.StudentView;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class MainController {
+public class MainController 
+{
 
-    MainModel mainModel;
+    MainModel m_MainModel;
+    DataManager m_Data;
 
-    public MainController() {
-        this.mainModel = new MainModel();
+    public MainController() 
+    {
+    	this.m_Data = DataManager.getInstance();
+        this.m_MainModel = new MainModel();
+    
     }
 
-    public Person login(String id, String password) {
+    public Person login(String id, String password) 
+    {
 
         Person personIsLive = null;
 
-        if (checkLogin(id)) {
+        if (checkLogin(id)) 
+        {
 
-            personIsLive = mainModel.login(id, password);
+            personIsLive = m_MainModel.login(id, password);
 
         }
 
@@ -30,48 +37,67 @@ public class MainController {
 
     }
 
-    public boolean register(String id, String firstName, String lastName, String phone, String email, String password, boolean instructor) throws IOException {
+    public boolean register(String id, String firstName, String lastName, String phone, String email, String password, boolean instructor) throws IOException 
+    {
 
-        return mainModel.register(id, firstName, lastName, phone, email, password, instructor);
+    	if(checkIfHaveOtherIdOrEmailInSystem(id)) 
+    	{
+    		    	
+        return m_MainModel.register(id, firstName, lastName, phone, email, password, instructor);
 
+    	}
+    	
+    	return false;
+    	
     }
 
-    public void loginAccess(Scanner scanner, Person i_Person) throws IOException {
+    public void loginAccess(Scanner scanner, Person person) throws IOException
+    {
 
         InstructorController instructorController;
         StudentController studentController;
 
-        if (i_Person instanceof Student) {
+        if (person instanceof Student)
+        {
 
-            studentController = new StudentController((Student) i_Person);
+            studentController = new StudentController((Student) person);
             studentController.start(scanner);
+            
         }
 
-        if (i_Person instanceof Instructor) {
-            instructorController = new InstructorController((Instructor) i_Person);
+        if (person instanceof Instructor) 
+        {
+        	
+            instructorController = new InstructorController((Instructor) person);
             instructorController.start(scanner);
 
         }
+        
     }
 
-    public boolean checkLogin(String id) {
+    public boolean checkLogin(String id)
+    {
 
         boolean inputWorng = true;
 
-        if (id.length() != 9 || !(isNumeric(id))) {
+        if (id.length() != 9 || !(isNumeric(id))) 
+        {
 
-            return !inputWorng;
+            inputWorng = !inputWorng;
 
         }
 
         return inputWorng;
+        
     }
 
-    private boolean isNumeric(String id) {
+    private boolean isNumeric(String id) 
+    {
 
         boolean isNumeric = false;
 
-        try {
+        try 
+        {
 
             Integer.parseInt(id);
 
@@ -83,6 +109,38 @@ public class MainController {
 
         return !isNumeric;
 
+    }
+      
+    private boolean checkIfHaveOtherIdOrEmailInSystem(String id) 
+    {
+    	
+	
+	try 
+	{
+	
+		Integer.parseInt(id);
+		
+	}
+	catch(NumberFormatException e)
+	{
+		
+		return false;
+		
+	}
+	
+    	Instructor instructor = m_Data.findInstructor(id);
+    	Student student = m_Data.findStudent(id);
+    	boolean itsExsits = true;
+    	
+    	if(student != null || instructor != null) 
+    	{
+    		
+    		itsExsits = !itsExsits; 
+    		
+    	}
+    	
+    	return itsExsits;
+    	
     }
 
 }

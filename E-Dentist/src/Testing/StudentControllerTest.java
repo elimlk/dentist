@@ -9,7 +9,8 @@ import org.junit.jupiter.api.Assertions;
 
 import java.io.IOException;
 
-public class StudentControllerTest {
+public class StudentControllerTest 
+{
 
     private DataManager m_Data;
     private  Instructor m_Instructor;
@@ -21,6 +22,7 @@ public class StudentControllerTest {
     @Before
     public void setUp() throws IOException
     {
+    	
         m_Data  = DataManager.getInstance();
         m_MainController = new MainController();
         m_Instructor= new Instructor("Daddy","Daddon","123123123","0541231230","Daddy@gmail,com","Daddy121212");

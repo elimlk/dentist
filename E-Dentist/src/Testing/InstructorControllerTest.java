@@ -39,13 +39,13 @@ public class InstructorControllerTest {
     public void testChangeRequirement()
     {
 
-        String messageFailed = m_InstructorConstroller.changeReq("a","1");
+        String messageFailed = m_InstructorConstroller.changeRequirement("a","1");
 
-        Assertions.assertEquals("invalid type code or value incorrect",m_InstructorConstroller.changeReq("a","1"),"The value type code is not valid");
+        Assertions.assertEquals("invalid type code or value incorrect",m_InstructorConstroller.changeRequirement("a","1"),"The value type code is not valid");
         Assertions.assertFalse("invalid type o value incorrect".equals(messageFailed));
-        Assertions.assertEquals("invalid type code or value incorrect",m_InstructorConstroller.changeReq("2",""),"The value type code for change its not valid");
-        Assertions.assertEquals("invalid type code or value incorrect",m_InstructorConstroller.changeReq("2","-2"),"The type code for change its Negative");
-        Assertions.assertEquals("invalid type code or value incorrect",m_InstructorConstroller.changeReq("-29","2"),"The value type code its Negative");
+        Assertions.assertEquals("invalid type code or value incorrect",m_InstructorConstroller.changeRequirement("2",""),"The value type code for change its not valid");
+        Assertions.assertEquals("invalid type code or value incorrect",m_InstructorConstroller.changeRequirement("2","-2"),"The type code for change its Negative");
+        Assertions.assertEquals("invalid type code or value incorrect",m_InstructorConstroller.changeRequirement("-29","2"),"The value type code its Negative");
 
     }
 
