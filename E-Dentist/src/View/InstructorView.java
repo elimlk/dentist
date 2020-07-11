@@ -65,11 +65,11 @@ public class InstructorView {
         String TreatmentCode;
         boolean stayMenu = true;
 
-        System.out.println("-------------------------------------");
-        System.out.println(m_InstructorController.showWaitingList());
-        System.out.println("-------------------------------------");
+
         if (m_InstructorController.pendingUpdates()){
             while (stayMenu) {
+                System.out.println("-------------------------------------");
+                System.out.println(m_InstructorController.showWaitingList());
                 System.out.println("Enter treatment code to approve/disapprove. (press 'b' to go back)");
                 TreatmentCode = scanner.nextLine();
                 if (!(TreatmentCode.equals("b") || TreatmentCode.equals("B"))) {
@@ -81,6 +81,7 @@ public class InstructorView {
                         outputString("Wrong input ,try again");
                 } else
                     stayMenu = false;
+                System.out.println("-------------------------------------");
             }
         }
     }
