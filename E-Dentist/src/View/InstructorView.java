@@ -46,6 +46,7 @@ public class InstructorView {
                     break;
                 case ("b"):
                 case ("B"):
+                    clearScreen();
                     stayMenu = false;
                     break;
                 default:
@@ -75,9 +76,9 @@ public class InstructorView {
                     System.out.println("Enter grade: (enter '-1' to disapprove)");
                     String grade = scanner.nextLine();
                     if (m_InstructorController.aproveTreatment(TreatmentCode, grade)) {
-                        System.out.println("Treatment approved successfully");
+                        outputString("Treatment approved successfully");
                     } else
-                        System.out.println("Wrong input ,try again");
+                        outputString("Wrong input ,try again");
                 } else
                     stayMenu = false;
             }
@@ -140,5 +141,10 @@ public class InstructorView {
     }
     public void outputString(String str){
         System.out.println("## "+str + " ##");
+    }
+
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }

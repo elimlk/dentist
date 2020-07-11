@@ -51,11 +51,14 @@ public class Student extends Person
 
 	public String getM_treatmentUpdates() {
 		String updateStr = "Treatments waiting list is: \n";
+		String status ="";
 		if (m_treatmentWaitingToApprove.size() == 0)
 			updateStr="No new updates";
 		else {
-			for (Treatment treatment : m_treatmentWaitingToApprove)
-				updateStr += "	" + treatment.getM_DateCompleted() + " " + treatment.toString() + "changed status to 'COMPLETE'. Waiting for approval" + "\n";
+			for (Treatment treatment : m_treatmentWaitingToApprove) {
+				status = (treatment.getStatus()) ? "COMPLETE" : "PENDDING";
+				updateStr += "	" + treatment.getM_DateCompleted() + " " + treatment.toString() + " ** changed status to '" + status + "'" + "\n";
+			}
 		}
 		return updateStr;
 	}
@@ -142,6 +145,10 @@ public class Student extends Person
 		m_treatmentWaitingToApprove.add(treatment);
 	}
 
+	@Override
+	public void updateAboutDisapprove(Treatment treatment) {
+
+	}
 	@Override
 	public void updateAboutGrades(Treatment treatment) {
 		m_TreatmentGraded.add(treatment);

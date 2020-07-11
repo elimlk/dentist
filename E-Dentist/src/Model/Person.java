@@ -45,6 +45,7 @@ public abstract class Person  implements Serializable {
 
 	public abstract void updateAboutComplete(Treatment treatment);
 	public abstract void updateAboutGrades(Treatment treatment);
+	public abstract void updateAboutDisapprove(Treatment treatment);
 
 
 }

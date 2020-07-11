@@ -103,7 +103,9 @@ public class Treatment implements Serializable {
 
 	public void setM_treatmentStatus(boolean m_treatmentStatus) {
 		this.m_treatmentStatus = m_treatmentStatus;
+		notifyObserversForDisapprove();
 	}
+
 
 	public void registerForUpdates(Person person){
 		m_observerList.add(person);
@@ -111,6 +113,12 @@ public class Treatment implements Serializable {
 	public void unregisterFromUpdates(Person person)
 	{
 		m_observerList.remove(person);
+	}
+
+	private void notifyObserversForDisapprove() {
+		for (Person person : m_observerList){
+			person.updateAboutDisapprove(this);
+		}
 	}
 	public void notifyObserversForComplete(){
 		for (Person person : m_observerList){

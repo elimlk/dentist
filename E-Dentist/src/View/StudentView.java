@@ -77,7 +77,7 @@ public class StudentView {
         if(!(m_studentController.findPatient(patientId)))
             System.out.println("Patient with id: " +patientId+ "not found!");
         else {
-            System.out.println("Opened file!");
+            outputString("Opened file!");
             while (stayMenu) {
                 System.out.println("what would you like to do?");
                 System.out.println("1. Show upcoming treatments");
@@ -103,6 +103,7 @@ public class StudentView {
                         break;
                     case ("b"):
                     case ("B"):
+                        clearScreen();
                         stayMenu = false;
                         break;
                     default:
@@ -120,9 +121,9 @@ public class StudentView {
         selectedTreatmentCode = scanner.nextLine();
 
         if (m_studentController.deleteTreatment(patientId,selectedTreatmentCode))
-            System.out.println("Treatment deleted successfully");
+            outputString("Treatment deleted successfully");
         else
-            System.out.println("Treatment deletion failed");
+            outputString("Treatment deletion failed");
     }
 
     private void completeTreatment(Scanner scanner, String patientId) {
@@ -133,9 +134,9 @@ public class StudentView {
         selectedTreatmentCode = scanner.nextLine();
 
         if (m_studentController.completeTreatment(patientId,selectedTreatmentCode))
-            System.out.println("Treatment completed successfully - Wait for instructor approval");
+            outputString("Treatment completed successfully - Wait for instructor approval");
         else
-            System.out.println("Treatment completion failed");
+            outputString("Treatment completion failed");
     }
 
 
@@ -158,9 +159,9 @@ public class StudentView {
         email = scanner.nextLine();
 
         if (m_studentController.createNewPatient(id,firstName,lastName,phone,email))
-            System.out.println("Patient added successfully");
+            outputString("Patient added successfully");
         else
-            System.out.println("Failed to add add patient.");
+            outputString("Failed to add patient.");
 
     }
 
@@ -209,5 +210,8 @@ public class StudentView {
     public void outputString(String str){
         System.out.println("## "+str + " ##");
     }
-
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
 }

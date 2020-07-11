@@ -57,7 +57,13 @@ public class Instructor extends Person {
 	}
 
 	@Override
+	public void updateAboutDisapprove(Treatment treatment) {
+
+	}
+
+	@Override
 	public void updateAboutGrades(Treatment treatment) { } // do nothing
+
 
 	public boolean aproveTrearment(String userInput,String grade){
 		int input = -999;
@@ -71,16 +77,21 @@ public class Instructor extends Person {
 		}
 
 		if(input>=0 && input < m_pendingTreatmentList.size() ){
+			String studentID = m_pendingTreatmentList.get(input).getTreatmentBy();
 			if((gradeInt>=0) && (gradeInt<= 100)) {
-				String studentID = m_pendingTreatmentList.get(input).getTreatmentBy();
 				m_pendingTreatmentList.get(input).setM_Grade(gradeInt);
 				data.findStudent(studentID).deleteTreatmentFromWaitinglist(m_pendingTreatmentList.get(input));
 				data.findStudent(studentID).updateReq(m_pendingTreatmentList.get(input).getM_TypeCode());
 				m_pendingTreatmentList.remove(input);
 				return true;
-			}else if(gradeInt == -1) {
-				m_pendingTreatmentList.get(input).setM_treatmentStatus(false);
-				m_pendingTreatmentList.remove(input);
+			}else
+				{
+				if(gradeInt == -1) {
+					m_pendingTreatmentList.get(input).setM_treatmentStatus(false);
+					m_pendingTreatmentList.remove(input);
+					//data.findStudent(studentID).deleteTreatmentFromWaitinglist(m_pendingTreatmentList.get(input));
+					return true;
+				}
 			}
 		}
 		return false;
