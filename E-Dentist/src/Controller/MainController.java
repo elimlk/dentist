@@ -18,30 +18,72 @@ public class MainController {
 
     public Person login(String id, String password) {
 
-        return (mainModel.login(id, password));
+        Person personIsLive = null;
+
+        if (checkLogin(id)) {
+
+            personIsLive = mainModel.login(id, password);
+
+        }
+
+        return personIsLive;
+
     }
 
     public boolean register(String id, String firstName, String lastName, String phone, String email, String password, boolean instructor) throws IOException {
 
-        return mainModel.register(id,firstName,lastName,phone,email,password,instructor);
+        return mainModel.register(id, firstName, lastName, phone, email, password, instructor);
 
     }
 
-    public void loginAccess(Scanner scanner,Person i_Person) throws IOException {
+    public void loginAccess(Scanner scanner, Person i_Person) throws IOException {
 
         InstructorController instructorController;
         StudentController studentController;
 
-    	if (i_Person instanceof Student){
-    		
-            studentController = new StudentController((Student)i_Person);
+        if (i_Person instanceof Student) {
+
+            studentController = new StudentController((Student) i_Person);
             studentController.start(scanner);
         }
 
-    	if (i_Person instanceof Instructor){
-    	    instructorController = new InstructorController((Instructor)i_Person);
-    	    instructorController.start(scanner);
+        if (i_Person instanceof Instructor) {
+            instructorController = new InstructorController((Instructor) i_Person);
+            instructorController.start(scanner);
 
         }
     }
+
+    public boolean checkLogin(String id) {
+
+        boolean inputWorng = true;
+
+        if (id.length() != 9 || !isNumeric(id)) {
+
+            throw new IllegalArgumentException("User or Password is not correct");
+
+        }
+
+        return inputWorng;
+    }
+
+    private boolean isNumeric(String id) {
+
+        boolean isNumeric = false;
+
+        try {
+
+            Integer.parseInt(id);
+            isNumeric = !isNumeric;
+
+        } catch (NumberFormatException e) {
+
+            return isNumeric;
+
+        }
+
+        return !isNumeric;
+
+    }
+
 }
