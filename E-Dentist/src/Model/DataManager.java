@@ -195,7 +195,12 @@ public class DataManager
 
 	public boolean checkValidity(String id, String firstName, String lastName, String phone, String email) {
 
-		int id_int = 0;
+		try {
+			int id_int = Integer.parseInt(id);
+			int phone_int = Integer.parseInt(phone);
+		} catch (NumberFormatException e) {
+			return false;
+		}
 		boolean validInput = true;
 		String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
                 "[a-zA-Z0-9_+&*-]+)*@" +

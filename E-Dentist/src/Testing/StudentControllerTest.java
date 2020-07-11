@@ -39,7 +39,7 @@ public class StudentControllerTest {
     {
 
         Assertions.assertTrue(m_StudentController.createNewPatient("987654321", "Asaf", "Malka", "0545347712", "Asaf@gmail.com"));
-        Assertions.assertTrue(m_StudentController.createNewPatient("987654321", "", "", "", "Asaf@gmail.com"));
+        Assertions.assertTrue(m_StudentController.createNewPatient("987654321", "", "", "1", "Asaf@gmail.com"));
         Assertions.assertFalse(m_StudentController.createNewPatient("987654321", "Asaf", "Malka", "0545347712", "Asaf@gmailcom"));
         Assertions.assertFalse(m_StudentController.createNewPatient("98765432", "Asaf", "Malka", "0545347712", "Asaf@gmailcom"));
         Assertions.assertFalse(m_StudentController.createNewPatient("", "", "", "", ""));
