@@ -135,7 +135,6 @@ public class StudentView {
                    
                     case ("b"):
                     case ("B"):
-                        clearScreen();
                         stayMenu = false;
                         break;
                     
@@ -311,13 +310,6 @@ public class StudentView {
         System.out.println("## " + printOutput + " ##");
     
     }
-    
-    public static void clearScreen()
-     {
-    	
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-        
-    }
+
     
 }
